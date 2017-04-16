@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">DAMP</string>
+    <string name="splashTitle">D.A.M.P</string>
+    <string name="splashSubtitle">A Disaster Application for Your Medical Preparedness</string>
+    <string name="teamName">Team 7155: A. Andrews, E. Diaz, A. Rodriguez, M. Essue, J. Valdez</string>
 </resources>
