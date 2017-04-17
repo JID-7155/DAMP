@@ -27,7 +27,7 @@
         android:layout_marginRight="8dp">
 
         <ListView
-            android:id="@+id/viewPlansList"
+            android:id="@android:id/list"
             android:layout_width="match_parent"
             android:layout_height="342dp"
             tools:layout_editor_absoluteX="8dp"
