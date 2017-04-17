@@ -1,10 +1,12 @@
 package com.ad_revenue.damp;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.Window;
 
 public class Splash_Screen extends AppCompatActivity {
 
@@ -12,10 +14,27 @@ public class Splash_Screen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash__screen);
-        //yeah boiiii
+
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.mainToolbar);
+        setSupportActionBar(myToolbar);
+
     }
 
     public void editPlans(View view) {
+        Intent intent = new Intent(this, View_Plans.class);
+        startActivity(intent);
+
+        if(getSupportActionBar() != null) {
+            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.rgb(48,124,239)));
+        }
+    }
+
+    public void emergencyPlans(View view) { //For "Emergency Mode" button press.
+        if(getSupportActionBar() != null) {
+            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.rgb(255,0,0)));
+        }
+
+
         Intent intent = new Intent(this, View_Plans.class);
         startActivity(intent);
     }
