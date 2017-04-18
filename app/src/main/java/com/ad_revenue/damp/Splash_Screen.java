@@ -17,6 +17,8 @@ public class Splash_Screen extends AppCompatActivity {
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.mainToolbar);
         setSupportActionBar(myToolbar);
+        getSupportActionBar().setTitle(" ");
+
 
     }
 

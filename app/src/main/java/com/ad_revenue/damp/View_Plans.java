@@ -2,17 +2,14 @@ package com.ad_revenue.damp;
 
 import android.app.ListActivity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class View_Plans extends ListActivity {
 
-    String[] stuff = {"Rick's Renal Dialysis Plan"};
+    String[] stuff = {"Oliver's Arrow Wound", "Midoriya's Bone Fractures", "Clark's Radiation Poisoning", "Leonard Snart's Cold"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

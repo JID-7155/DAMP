@@ -12,7 +12,8 @@ import android.widget.TextView;
 
 public class Plan_Screen extends AppCompatActivity {
 
-    String[] steps = {"Do this.", "Then this.", "And that too", "Do this.", "Then this.", "And that too", "Then this.", "And that too"};
+    String[] steps = {"Call emergency medical services.", "Carefully remove arrow.", "Utilize cloth or bandage, bind wound.",
+            "Apply pressure to bandaged wound.", "Hydrate wounded individual.", "When bleeding stops, clean wound to prevent infection."};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
