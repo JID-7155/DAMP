@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.ad_revenue.damp.Plan_Screen;
+
 public class View_Plans extends ListActivity {
 
     String[] stuff = {"Oliver's Arrow Wound", "Midoriya's Bone Fractures", "Clark's Radiation Poisoning", "Leonard Snart's Cold"};
