@@ -5,7 +5,7 @@
     android:id="@+id/splashTitleParent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ad_revenue.damp.Splash_Screen">
+    tools:context="Splash_Screen">
 
     <include layout="@layout/custom_toolbar"/>
 
