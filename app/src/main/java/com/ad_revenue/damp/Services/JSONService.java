@@ -1,17 +1,17 @@
 package com.ad_revenue.damp.Services;
 
-import com.ad_revenue.damp.Exceptions.JSONException;
-
 import android.content.Context;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Iterator;
 
 public class JSONService {
     private final JSONParser parser = new JSONParser();
@@ -20,18 +20,27 @@ public class JSONService {
         //Leaving this here just in case.
     }
 
-    public String getProperty(String propertyName, Context context) throws JSONException {
-        //Pass in getApplicationContext for context, or maybe just replace it here.
-        //TODO: Fix up InputStream.
+    public String getProperty(String propertyName, Object sectionName) {
+        JSONObject json = (JSONObject) sectionName;
+        return (String) json.get(propertyName);
+    }
+
+    public String[] getProperties(Context context, String fileName, String propertyName) {
         try {
-            InputStream stream = context.getAssets().open("example.json");
+            InputStream stream = context.getAssets().open(fileName);
             InputStreamReader reader = new InputStreamReader(stream);
+            JSONArray myJson = (JSONArray) parser.parse(reader);
 
-            Object obj = parser.parse(reader);
+            String[] toReturn = new String[myJson.size()];
+            Iterator jsonIterator = myJson.iterator();
+            int count = 0;
 
-            JSONObject json = (JSONObject) obj;
+            while(jsonIterator.hasNext()) {
+                toReturn[count] = getProperty(propertyName, jsonIterator.next());
+                count++;
+            }
 
-            return (String) json.get(propertyName);
+            return toReturn;
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -40,6 +49,6 @@ public class JSONService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        throw new JSONException();
+        return new String[1];
     }
 }
