@@ -17,7 +17,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="View_Plans" />
+        <activity android:name="View_Plans"></activity>
         <activity android:name="Plan_Screen"></activity>
     </application>
 
