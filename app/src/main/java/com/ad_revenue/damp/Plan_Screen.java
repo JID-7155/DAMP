@@ -22,11 +22,17 @@ public class Plan_Screen extends AppCompatActivity {
 
         Context myContext = getApplicationContext();
         JSONService myJSON = new JSONService();
+
         String[] steps = myJSON.getProperties(myContext, "plans.json", "Steps");
-        String[] stringSteps = steps[getIntent().getIntExtra("indexInto", 0)].split("\\\\r?\\\\n");
+        int planNumber = getIntent().getIntExtra("indexInto", 0);
+        String[] stringSteps = steps[planNumber].split("\\\\r?\\\\n");
+
         CustomAdapter adapter = new CustomAdapter(this,stringSteps);
         ListView listView = (ListView) findViewById(R.id.stepList);
         listView.setAdapter(adapter);
+
+        TextView planTitle = (TextView) findViewById(R.id.planNameText);
+        planTitle.setText(myJSON.getProperties(myContext, "plans.json", "Name")[planNumber]);
     }
 
     class CustomAdapter extends ArrayAdapter<String>

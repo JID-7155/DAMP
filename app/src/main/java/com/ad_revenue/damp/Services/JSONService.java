@@ -20,6 +20,10 @@ public class JSONService {
         //Leaving this here just in case.
     }
 
+    public void writeProperty(Context context, String toWrite, String fileName) {
+
+    }
+
     public String getProperty(String propertyName, Object sectionName) {
         JSONObject json = (JSONObject) sectionName;
         return (String) json.get(propertyName);

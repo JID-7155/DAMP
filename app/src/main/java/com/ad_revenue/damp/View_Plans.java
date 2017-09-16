@@ -21,7 +21,7 @@ public class View_Plans extends ListActivity {
         String[] stuff = myJSON.getProperties(myContext, "plans.json", "Name");
 
         setContentView(R.layout.activity_view__plans);
-        ArrayAdapter adapter = new ArrayAdapter<String>(this,R.layout.activity_singeplan,stuff);
+        ArrayAdapter adapter = new ArrayAdapter<String>(this,R.layout.activity_singleplan,stuff);
         ListView listView = this.getListView();
         listView.setAdapter(adapter);
 
