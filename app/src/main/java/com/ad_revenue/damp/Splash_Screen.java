@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+
 public class Splash_Screen extends AppCompatActivity {
 
     @Override
@@ -18,8 +19,6 @@ public class Splash_Screen extends AppCompatActivity {
         Toolbar myToolbar = (Toolbar) findViewById(R.id.mainToolbar);
         setSupportActionBar(myToolbar);
         getSupportActionBar().setTitle(" ");
-
-
     }
 
     public void editPlans(View view) {

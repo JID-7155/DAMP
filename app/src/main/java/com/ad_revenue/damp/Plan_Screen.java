@@ -1,6 +1,7 @@
 package com.ad_revenue.damp;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,17 +11,20 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class Plan_Screen extends AppCompatActivity {
+import com.ad_revenue.damp.Services.JSONService;
 
-    String[] steps = {"Call emergency medical services.", "Carefully remove arrow.", "Utilize cloth or bandage, bind wound.",
-            "Apply pressure to bandaged wound.", "Hydrate wounded individual.", "When bleeding stops, clean wound to prevent infection."};
+public class Plan_Screen extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plan__screen);
 
-        CustomAdapter adapter = new CustomAdapter(this,steps);
+        Context myContext = getApplicationContext();
+        JSONService myJSON = new JSONService();
+        String[] steps = myJSON.getProperties(myContext, "plans.json", "Steps");
+        String[] stringSteps = steps[getIntent().getIntExtra("indexInto", 0)].split("\\\\r?\\\\n");
+        CustomAdapter adapter = new CustomAdapter(this,stringSteps);
         ListView listView = (ListView) findViewById(R.id.stepList);
         listView.setAdapter(adapter);
     }
@@ -40,18 +44,16 @@ public class Plan_Screen extends AppCompatActivity {
 
         }
 
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-
-            LayoutInflater vi = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-            View row = vi.inflate(R.layout.single_step, parent, false);
-            TextView titlee = (TextView) row.findViewById(R.id.stepText);
-            int pos = position+1;
-            titlee.setText(+pos + ". " + title[position]);
-            pos++;
-            return row;
+        @Override @NonNull
+        public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+            if(convertView == null) {
+                LayoutInflater vi = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View row = vi.inflate(R.layout.single_step, parent, false);
+                TextView stepText = (TextView) row.findViewById(R.id.stepText);
+                stepText.setText(title[position]);
+                return row;
+            }
+            return convertView;
         }
-
     }
 }
