@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.ad_revenue.damp.Services.JSONService;
 
@@ -18,10 +19,12 @@ public class View_Plans extends ListActivity {
 
         Context myContext = getApplicationContext();
         JSONService myJSON = new JSONService();
-        String[] stuff = myJSON.getProperties(myContext, "plans.json", "Name");
+
+        setupExamplePlans(myContext, myJSON);
+        String[] stuff = myJSON.getInternalProperties(myContext, "plans.json", "Name");
 
         setContentView(R.layout.activity_view__plans);
-        ArrayAdapter adapter = new ArrayAdapter<String>(this,R.layout.activity_singeplan,stuff);
+        ArrayAdapter adapter = new ArrayAdapter<>(this,R.layout.activity_singleplan,stuff);
         ListView listView = this.getListView();
         listView.setAdapter(adapter);
 
@@ -35,5 +38,12 @@ public class View_Plans extends ListActivity {
         Intent intent = new Intent(this, Plan_Screen.class);
         intent.putExtra("indexInto", position);
         startActivity(intent);
+    }
+
+    protected void setupExamplePlans(Context context, JSONService myJ) {
+        myJ.writeToPlans(context, "Example Plan 1", "1. Brace your core.\n\n2. Squat.", "Aspirin", "Source: Adrian.");
+        myJ.writeToPlans(context, "Example Plan 2", "1. Brace your core.\n\n2. Lift.", "Aspirin", "Source: Adrian.");
+        myJ.writeToPlans(context, "Example Plan 3", "1. Brace your core.\n\n2. Press.", "Aspirin", "Source: Adrian.");
+        Toast.makeText(context, "Plan loaded.", Toast.LENGTH_SHORT).show();
     }
 }

@@ -1,9 +1,9 @@
 package com.ad_revenue.damp;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,14 +22,20 @@ public class Plan_Screen extends AppCompatActivity {
 
         Context myContext = getApplicationContext();
         JSONService myJSON = new JSONService();
-        String[] steps = myJSON.getProperties(myContext, "plans.json", "Steps");
-        String[] stringSteps = steps[getIntent().getIntExtra("indexInto", 0)].split("\\\\r?\\\\n");
+
+        String[] steps = myJSON.getInternalProperties(myContext, "plans.json", "Steps");
+        int planNumber = getIntent().getIntExtra("indexInto", 0);
+        String[] stringSteps = steps[planNumber].split("\\\\r?\\\\n");
+
         CustomAdapter adapter = new CustomAdapter(this,stringSteps);
         ListView listView = (ListView) findViewById(R.id.stepList);
         listView.setAdapter(adapter);
+
+        TextView planTitle = (TextView) findViewById(R.id.planNameText);
+        planTitle.setText(myJSON.getInternalProperties(myContext, "plans.json", "Name")[planNumber]);
     }
 
-    class CustomAdapter extends ArrayAdapter<String>
+    private class CustomAdapter extends ArrayAdapter<String>
     {
         Context context;
         String[] title;
