@@ -36,4 +36,8 @@ public class View_Plans extends ListActivity {
         intent.putExtra("indexInto", position);
         startActivity(intent);
     }
+
+    anyrandombullshit
+    Im trying to improve my cursing
+            elie stop
 }
