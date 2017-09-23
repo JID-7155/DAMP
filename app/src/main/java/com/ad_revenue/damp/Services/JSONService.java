@@ -64,6 +64,39 @@ public class JSONService {
             System.out.println("Error reading file.");
         }
     }
+    public void writeToPatients(Context context, String newName, Integer newAge, String newOtherInfo) {
+        try {
+            JSONObject section = new JSONObject();
+            section.put("Name", newName);
+            section.put("Age", newAge);
+            section.put("Other Info", newOtherInfo);
+
+            String fullFilePath = context.getFilesDir() + File.separator + "patients.json";
+            if(isFilePresent(context, "patients.json")) {
+                FileReader readMe = new FileReader(context.getFilesDir() + File.separator + "patients.json");
+                JSONArray currentJson = (JSONArray) parser.parse(readMe);
+                if(!currentJson.contains(section)) {
+                    FileWriter file = new FileWriter(fullFilePath, false);
+                    currentJson.add(section);
+                    file.write(currentJson.toJSONString());
+                    file.close();
+                }
+                readMe.close();
+            } else {
+                FileWriter file = new FileWriter(fullFilePath, false);
+                JSONArray myArray = new JSONArray();
+                myArray.add(section);
+                file.write(myArray.toJSONString());
+                file.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error reading/writing to file.");
+        } catch (ParseException e) {
+            e.printStackTrace();
+            System.out.println("Error reading file.");
+        }
+    }
 
     private String getProperty(String propertyName, Object sectionName) {
         JSONObject json = (JSONObject) sectionName;
