@@ -4,21 +4,25 @@
 
     <application
         android:allowBackup="true"
-        android:title="DAMP"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/splashTitle"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name="Splash_Screen">
+        android:theme="@style/AppTheme"
+        android:title="DAMP">
+        <activity android:name=".Splash_Screen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="View_Plans"></activity>
-        <activity android:name="Plan_Screen"></activity>
+        <activity android:name=".View_Plans" />
+        <activity android:name=".Plan_Screen" />
+        <activity
+            android:name=".Create_Screen"
+            android:label="@string/title_activity_create__screen"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
