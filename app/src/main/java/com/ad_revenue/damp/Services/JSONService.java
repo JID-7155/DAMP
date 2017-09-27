@@ -141,7 +141,12 @@ public class JSONService {
                 FileReader readMe = new FileReader(context.getFilesDir() + File.separator + "plans.json");
                 JSONArray currentJson = (JSONArray) parser.parse(readMe);
 
+
                 currentJson.remove(position);
+                FileWriter file = new FileWriter(fullFilePath, false);
+                file.write(currentJson.toJSONString());
+                file.close();
+
                 readMe.close();
             }
         } catch (IOException e) {
