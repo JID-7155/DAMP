@@ -124,8 +124,7 @@ public class JSONService {
             e.printStackTrace();
             System.out.println("Error reading/writing to file.");
         }
-        String[] failSafe = new String[1];
-        return failSafe;
+        return new String[1];
     }
 
     private String getProperty(String propertyName, Object sectionName) {
@@ -167,7 +166,6 @@ public class JSONService {
             JSONArray myJson;
             FileReader file = new FileReader(context.getFilesDir() + File.separator + fileName);
             myJson = (JSONArray) parser.parse(file);
-            System.out.println(myJson.toJSONString());
             String[] toReturn = new String[myJson.size()];
             Iterator jsonIterator = myJson.iterator();
             int count = 0;
