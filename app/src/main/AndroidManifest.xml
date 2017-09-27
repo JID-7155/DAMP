@@ -20,6 +20,10 @@
         <activity android:name=".View_Plans" />
         <activity android:name=".Plan_Screen" />
         <activity android:name=".Edit_Patient_Screen"></activity>
+        <activity
+            android:name=".Create_Screen"
+            android:label="@string/title_activity_create__screen"
+            android:theme="@style/AppTheme"></activity>
     </application>
-
+  
 </manifest>
