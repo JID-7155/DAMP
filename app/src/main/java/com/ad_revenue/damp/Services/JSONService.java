@@ -132,6 +132,26 @@ public class JSONService {
         return (String) json.get(propertyName);
     }
 
+    public void deleteSection(Context context, int position) {
+        try {
+
+
+            String fullFilePath = context.getFilesDir() + File.separator + "plans.json";
+            if(isFilePresent(context, "plans.json")) {
+                FileReader readMe = new FileReader(context.getFilesDir() + File.separator + "plans.json");
+                JSONArray currentJson = (JSONArray) parser.parse(readMe);
+
+                currentJson.remove(position);
+                readMe.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error reading/writing to file.");
+        } catch (ParseException e) {
+            e.printStackTrace();
+            System.out.println("Error reading file.");
+        }
+    }
 
     //Reads in conditions from assets folder. Do not delete.
     public String[] getProperties(Context context, String fileName, String propertyName) {

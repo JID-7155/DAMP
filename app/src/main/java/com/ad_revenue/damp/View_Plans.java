@@ -15,10 +15,14 @@ public class View_Plans extends ListActivity {
 
     private JSONService myJSON;
     private Context myContext;
+
+    private enum ListMode {EDIT, DELETE}
+    private ListMode currentMode;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        currentMode = ListMode.EDIT;
         myContext = getApplicationContext();
         myJSON = new JSONService();
 
@@ -37,10 +41,39 @@ public class View_Plans extends ListActivity {
         // TODO Auto-generated method stub
         super.onListItemClick(l, v, position, id);
 
+
+        switch(currentMode) {
+            case EDIT:
+                gotoPlan(position);
+                break;
+            case DELETE:
+                deletePlan(position);
+                break;
+
+        }
+
+    }
+
+    public void gotoPlan(int position) {
+
         Intent intent = new Intent(this, Plan_Screen.class);
         intent.putExtra("indexInto", position);
         startActivity(intent);
     }
+
+    public void gotoDeleteMode(View v) {
+
+        if(currentMode != ListMode.DELETE) {
+            currentMode = ListMode.DELETE;
+        } else {
+            currentMode = ListMode.EDIT;
+        }
+    }
+
+    public void deletePlan(int position) {
+        myJSON.deleteSection(myContext, position);
+    }
+
 
     public void addPlan(View view) {
         Intent intent = new Intent(this, Create_Screen.class);
