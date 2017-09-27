@@ -33,9 +33,9 @@ public class Edit_Patient_Screen extends AppCompatActivity {
         EditText ageText = (EditText) ageForm.findViewById(R.id.ageText);
         EditText miscText = (EditText) miscForm.findViewById(R.id.miscText);
 
-        jsonService.writeToPatients(this.context, nameText.getText().toString(), Integer.parseInt(ageText.getText().toString()), miscText.getText().toString());
+        jsonService.writeToPatients(this.context, nameText.getText().toString(), ageText.getText().toString(), miscText.getText().toString());
         Toast.makeText(context, "Patient Information saved successfully.", Toast.LENGTH_SHORT).show();
-        //TODO - Go back to previous screen, whatever that is.
+        finish();
     }
 
 }

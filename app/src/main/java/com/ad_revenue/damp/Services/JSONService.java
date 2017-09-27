@@ -33,16 +33,17 @@ public class JSONService {
     public void writeToPlans(Context context, String newName, String newSteps, String newMedications, String newOthers) {
         try {
             JSONObject section = new JSONObject();
-            section.put("Name", newName);
-            section.put("Steps", newSteps);
-            section.put("Medications", newMedications);
+
             section.put("Other Notes", newOthers);
+            section.put("Medications", newMedications);
+            section.put("Steps", newSteps);
+            section.put("Name", newName);
 
             String fullFilePath = context.getFilesDir() + File.separator + "plans.json";
-            if(isFilePresent(context, "plans.json")) {
+            if (isFilePresent(context, "plans.json")) {
                 FileReader readMe = new FileReader(context.getFilesDir() + File.separator + "plans.json");
                 JSONArray currentJson = (JSONArray) parser.parse(readMe);
-                if(!currentJson.contains(section)) {
+                if (!currentJson.contains(section)) {
                     FileWriter file = new FileWriter(fullFilePath, false);
                     currentJson.add(section);
                     file.write(currentJson.toJSONString());
@@ -64,18 +65,20 @@ public class JSONService {
             System.out.println("Error reading file.");
         }
     }
-    public void writeToPatients(Context context, String newName, Integer newAge, String newOtherInfo) {
+
+    @SuppressWarnings("unchecked")
+    public void writeToPatients(Context context, String newName, String newAge, String newOtherInfo) {
         try {
             JSONObject section = new JSONObject();
-            section.put("Name", newName);
-            section.put("Age", newAge);
             section.put("Other Info", newOtherInfo);
+            section.put("Age", newAge);
+            section.put("Name", newName);
 
             String fullFilePath = context.getFilesDir() + File.separator + "patients.json";
-            if(isFilePresent(context, "patients.json")) {
+            if (isFilePresent(context, "patients.json")) {
                 FileReader readMe = new FileReader(context.getFilesDir() + File.separator + "patients.json");
                 JSONArray currentJson = (JSONArray) parser.parse(readMe);
-                if(!currentJson.contains(section)) {
+                if (!currentJson.contains(section)) {
                     FileWriter file = new FileWriter(fullFilePath, false);
                     currentJson.add(section);
                     file.write(currentJson.toJSONString());
@@ -96,12 +99,40 @@ public class JSONService {
             e.printStackTrace();
             System.out.println("Error reading file.");
         }
+    }
+
+    public String[] getAllProperties(Context context, int index) {
+        String[] toReturn = new String[4];
+
+        try {
+            InputStream stream = context.getAssets().open("conditions.json");
+            InputStreamReader reader = new InputStreamReader(stream);
+            JSONArray myJson = (JSONArray) parser.parse(reader);
+
+            toReturn[0] = getProperty("Name", myJson.get(index));
+            toReturn[1] = getProperty("Steps", myJson.get(index));
+            toReturn[2] = getProperty("Medications", myJson.get(index));
+            toReturn[3] = getProperty("Other Notes", myJson.get(index));
+
+            return toReturn;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+            System.out.println("Error parsing file.");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error reading/writing to file.");
+        }
+        String[] failSafe = new String[1];
+        return failSafe;
     }
 
     private String getProperty(String propertyName, Object sectionName) {
         JSONObject json = (JSONObject) sectionName;
         return (String) json.get(propertyName);
     }
+
 
     //Reads in conditions from assets folder. Do not delete.
     public String[] getProperties(Context context, String fileName, String propertyName) {
@@ -114,7 +145,7 @@ public class JSONService {
             Iterator jsonIterator = myJson.iterator();
             int count = 0;
 
-            while(jsonIterator.hasNext()) {
+            while (jsonIterator.hasNext()) {
                 toReturn[count] = getProperty(propertyName, jsonIterator.next());
                 count++;
             }
@@ -142,7 +173,7 @@ public class JSONService {
             int count = 0;
             file.close();
 
-            while(jsonIterator.hasNext()) {
+            while (jsonIterator.hasNext()) {
                 toReturn[count] = getProperty(propertyName, jsonIterator.next());
                 count++;
             }
