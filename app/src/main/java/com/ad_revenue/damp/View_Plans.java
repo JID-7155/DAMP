@@ -33,7 +33,6 @@ public class View_Plans extends ListActivity {
         ArrayAdapter adapter = new ArrayAdapter<>(this,R.layout.activity_singleplan,stuff);
         ListView listView = this.getListView();
         listView.setAdapter(adapter);
-
     }
 
     @Override
@@ -41,27 +40,23 @@ public class View_Plans extends ListActivity {
         // TODO Auto-generated method stub
         super.onListItemClick(l, v, position, id);
 
-
         switch(currentMode) {
             case EDIT:
-                gotoPlan(position);
+                goToPlan(position);
                 break;
             case DELETE:
                 deletePlan(position);
                 break;
-
         }
-
     }
 
-    public void gotoPlan(int position) {
-
+    public void goToPlan(int position) {
         Intent intent = new Intent(this, Plan_Screen.class);
         intent.putExtra("indexInto", position);
         startActivity(intent);
     }
 
-    public void gotoDeleteMode(View v) {
+    public void switchMode(View v) {
         if(currentMode != ListMode.DELETE) {
             currentMode = ListMode.DELETE;
         } else {

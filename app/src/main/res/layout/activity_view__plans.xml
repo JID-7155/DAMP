@@ -73,7 +73,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:onClick="gotoDeleteMode"
+        android:onClick="switchMode"
         app:fabSize="mini"
         app:srcCompat="@android:drawable/ic_menu_delete"
         app:layout_constraintRight_toLeftOf="@+id/floatingActionButton2"
