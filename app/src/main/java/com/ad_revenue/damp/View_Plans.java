@@ -59,13 +59,16 @@ public class View_Plans extends ListActivity {
     public void switchMode(View v) {
         if(currentMode != ListMode.DELETE) {
             currentMode = ListMode.DELETE;
+            Toast.makeText(myContext, "Delete Mode", Toast.LENGTH_SHORT).show();
         } else {
             currentMode = ListMode.EDIT;
+            Toast.makeText(myContext, "Edit/View Mode", Toast.LENGTH_SHORT).show();
         }
     }
 
     public void deletePlan(int position) {
         myJSON.deleteSection(myContext, position);
+        Toast.makeText(myContext, "Plan deleted.", Toast.LENGTH_SHORT).show();
         onResume();
     }
 
