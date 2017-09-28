@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ad_revenue.damp.Services.JSONService;
 
@@ -18,6 +19,7 @@ public class Create_Screen extends AppCompatActivity {
 
     private JSONService myJSON;
     private Context myContext;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +27,26 @@ public class Create_Screen extends AppCompatActivity {
 
         myContext = getApplicationContext();
         myJSON = new JSONService();
+
+        if(getIntent().getBooleanExtra("template", false)) {
+
+            int planNumber = getIntent().getIntExtra("indexInto", 0);
+            String[] plan = myJSON.getAllProperties(myContext, planNumber);
+
+            EditText planName = (EditText) findViewById(R.id.editPlanName);
+            planName.setText(plan[0]);
+
+            EditText planSteps = (EditText) findViewById(R.id.editSteps);
+            planSteps.setText(plan[1]);
+
+            EditText planMeds = (EditText) findViewById(R.id.editMeds);
+            planMeds.setText(plan[2]);
+
+            EditText planOther = (EditText) findViewById(R.id.editOther);
+            planOther.setText(plan[3]);
+        }
+
+
     }
 
     public void submitInformation(View view){
@@ -42,6 +64,7 @@ public class Create_Screen extends AppCompatActivity {
 
         myJSON.writeToPlans(myContext, name, steps, meds, other);
 
+        Toast.makeText(myContext, "New Plan Created.", Toast.LENGTH_SHORT).show();
         finish();
     }
 }

@@ -6,4 +6,5 @@
     <string name="title_activity_create__screen">Create_Screen</string>
     <string name="button">Button</string>
     <string name="plan_name">Plan Name</string>
+    <string name="title_activity_template__screen">Template_Screen</string>
 </resources>
