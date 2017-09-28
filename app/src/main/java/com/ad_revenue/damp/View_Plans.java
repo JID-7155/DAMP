@@ -15,21 +15,24 @@ public class View_Plans extends ListActivity {
 
     private JSONService myJSON;
     private Context myContext;
+
+    private enum ListMode {EDIT, DELETE}
+    private ListMode currentMode;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        currentMode = ListMode.EDIT;
         myContext = getApplicationContext();
         myJSON = new JSONService();
 
-        //setupExamplePlans(myContext, myJSON);
+        setupExamplePlans(myContext, myJSON);
         String[] stuff = myJSON.getInternalProperties(myContext, "plans.json", "Name");
 
         setContentView(R.layout.activity_view__plans);
         ArrayAdapter adapter = new ArrayAdapter<>(this,R.layout.activity_singleplan,stuff);
         ListView listView = this.getListView();
         listView.setAdapter(adapter);
-
     }
 
     @Override
@@ -37,10 +40,38 @@ public class View_Plans extends ListActivity {
         // TODO Auto-generated method stub
         super.onListItemClick(l, v, position, id);
 
+        switch(currentMode) {
+            case EDIT:
+                goToPlan(position);
+                break;
+            case DELETE:
+                deletePlan(position);
+                break;
+        }
+    }
+
+    public void goToPlan(int position) {
         Intent intent = new Intent(this, Plan_Screen.class);
         intent.putExtra("indexInto", position);
         startActivity(intent);
     }
+
+    public void switchMode(View v) {
+        if(currentMode != ListMode.DELETE) {
+            currentMode = ListMode.DELETE;
+            Toast.makeText(myContext, "Delete Mode", Toast.LENGTH_SHORT).show();
+        } else {
+            currentMode = ListMode.EDIT;
+            Toast.makeText(myContext, "Edit/View Mode", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void deletePlan(int position) {
+        myJSON.deleteSection(myContext, position);
+        Toast.makeText(myContext, "Plan deleted.", Toast.LENGTH_SHORT).show();
+        onResume();
+    }
+
 
     public void addPlan(View view) {
         Intent intent = new Intent(this, Create_Screen.class);
@@ -51,7 +82,7 @@ public class View_Plans extends ListActivity {
         myJ.writeToPlans(context, "Example Plan 1", "1. Brace your core.\n\n2. Squat.", "Aspirin", "Source: Adrian.");
         myJ.writeToPlans(context, "Example Plan 2", "1. Brace your core.\n\n2. Lift.", "Aspirin", "Source: Adrian.");
         myJ.writeToPlans(context, "Example Plan 3", "1. Brace your core.\n\n2. Press.", "Aspirin", "Source: Adrian.");
-        Toast.makeText(context, "Plan loaded.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "Plans loaded.", Toast.LENGTH_SHORT).show();
     }
 
     @Override
