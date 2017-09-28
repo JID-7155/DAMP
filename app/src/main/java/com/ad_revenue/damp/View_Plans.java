@@ -1,7 +1,9 @@
 package com.ad_revenue.damp;
 
+import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +17,7 @@ public class View_Plans extends ListActivity {
 
     private JSONService myJSON;
     private Context myContext;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,8 +46,36 @@ public class View_Plans extends ListActivity {
     }
 
     public void addPlan(View view) {
-        Intent intent = new Intent(this, Create_Screen.class);
-        startActivity(intent);
+        AlertDialog choice = new AlertDialog.Builder(this).create();
+
+        choice.setTitle("Add Plan");
+        choice.setMessage("Do you want to start with a blank plan or a template?");
+
+        choice.setButton(AlertDialog.BUTTON_POSITIVE, "Blank",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Intent intent = new Intent(getApplicationContext(), Create_Screen.class);
+                        startActivity(intent);
+                    }
+        });
+
+        choice.setButton(AlertDialog.BUTTON_NEGATIVE, "Template",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Intent intent = new Intent(getApplicationContext(), Template_Screen.class);
+                        startActivity(intent);
+                    }
+                });
+
+        choice.setButton(AlertDialog.BUTTON_NEUTRAL, "Cancel",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+        });
+
+        choice.show();
+
     }
 
     protected void setupExamplePlans(Context context, JSONService myJ) {
