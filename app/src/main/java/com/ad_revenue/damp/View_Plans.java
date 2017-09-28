@@ -3,18 +3,13 @@ package com.ad_revenue.damp;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.ad_revenue.damp.Services.JSONService;
-
-import static com.ad_revenue.damp.R.attr.srcCompat;
 
 public class View_Plans extends ListActivity {
 
@@ -67,19 +62,14 @@ public class View_Plans extends ListActivity {
     }
 
     public void gotoDeleteMode(View v) {
-        Button deleteButton = (Button) v.findViewById(R.id.floatingActionButton2);
-
         if(currentMode != ListMode.DELETE) {
             currentMode = ListMode.DELETE;
-
         } else {
             currentMode = ListMode.EDIT;
-
         }
     }
 
     public void deletePlan(int position) {
-
         myJSON.deleteSection(myContext, position);
         onResume();
     }
@@ -91,11 +81,10 @@ public class View_Plans extends ListActivity {
     }
 
     protected void setupExamplePlans(Context context, JSONService myJ) {
-        //myJSON.deleteSection(myContext, 3);
         myJ.writeToPlans(context, "Example Plan 1", "1. Brace your core.\n\n2. Squat.", "Aspirin", "Source: Adrian.");
         myJ.writeToPlans(context, "Example Plan 2", "1. Brace your core.\n\n2. Lift.", "Aspirin", "Source: Adrian.");
         myJ.writeToPlans(context, "Example Plan 3", "1. Brace your core.\n\n2. Press.", "Aspirin", "Source: Adrian.");
-        Toast.makeText(context, "Plan loaded.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "Plans loaded.", Toast.LENGTH_SHORT).show();
     }
 
     @Override
