@@ -17,8 +17,6 @@ public class View_Plans extends ListActivity {
 
     private JSONService myJSON;
     private Context myContext;
-  
-    private enum ListMode {EDIT, DELETE}
     private ListMode currentMode;
 
     @Override
@@ -30,10 +28,10 @@ public class View_Plans extends ListActivity {
         myJSON = new JSONService();
 
         setupExamplePlans(myContext, myJSON);
-        String[] stuff = myJSON.getInternalProperties(myContext, "plans.json", "Name");
+        String[] plans = myJSON.getInternalProperties(myContext, "plans.json", "Name");
 
         setContentView(R.layout.activity_view__plans);
-        ArrayAdapter adapter = new ArrayAdapter<>(this,R.layout.activity_singleplan,stuff);
+        ArrayAdapter adapter = new ArrayAdapter<>(this, R.layout.activity_singleplan, plans);
         ListView listView = this.getListView();
         listView.setAdapter(adapter);
     }
@@ -43,7 +41,7 @@ public class View_Plans extends ListActivity {
         // TODO Auto-generated method stub
         super.onListItemClick(l, v, position, id);
 
-        switch(currentMode) {
+        switch (currentMode) {
             case EDIT:
                 goToPlan(position);
                 break;
@@ -60,7 +58,7 @@ public class View_Plans extends ListActivity {
     }
 
     public void switchMode(View v) {
-        if(currentMode != ListMode.DELETE) {
+        if (currentMode != ListMode.DELETE) {
             currentMode = ListMode.DELETE;
             Toast.makeText(myContext, "Delete Mode", Toast.LENGTH_SHORT).show();
         } else {
@@ -75,7 +73,6 @@ public class View_Plans extends ListActivity {
         onResume();
     }
 
-
     public void addPlan(View view) {
         AlertDialog choice = new AlertDialog.Builder(this).create();
 
@@ -88,7 +85,7 @@ public class View_Plans extends ListActivity {
                         Intent intent = new Intent(getApplicationContext(), Create_Screen.class);
                         startActivity(intent);
                     }
-        });
+                });
 
         choice.setButton(AlertDialog.BUTTON_NEGATIVE, "Template",
                 new DialogInterface.OnClickListener() {
@@ -103,7 +100,7 @@ public class View_Plans extends ListActivity {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                     }
-        });
+                });
 
         choice.show();
 
@@ -117,14 +114,16 @@ public class View_Plans extends ListActivity {
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
 
         String[] stuff = myJSON.getInternalProperties(myContext, "plans.json", "Name");
 
         setContentView(R.layout.activity_view__plans);
-        ArrayAdapter adapter = new ArrayAdapter<>(this,R.layout.activity_singleplan,stuff);
+        ArrayAdapter adapter = new ArrayAdapter<>(this, R.layout.activity_singleplan, stuff);
         ListView listView = this.getListView();
         listView.setAdapter(adapter);
     }
+
+    private enum ListMode {EDIT, DELETE}
 }

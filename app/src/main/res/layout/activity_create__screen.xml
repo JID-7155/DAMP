@@ -7,25 +7,26 @@
     tools:context="com.ad_revenue.damp.Create_Screen">
 
     <include
-        layout="@layout/content_create__screen"
         android:id="@+id/include4"
-        android:layout_height="0dp"
+        layout="@layout/content_create__screen"
         android:layout_width="0dp"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_constraintBottom_creator="1"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintTop_creator="1" />
 
     <Button
-        android:id="@+id/button6"
         android:layout_width="0dp"
         android:layout_height="51dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginStart="14dp"
         android:layout_marginTop="500dp"
         android:onClick="submitInformation"
         android:text="Create Plan"
@@ -34,9 +35,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1"
-        android:layout_marginStart="14dp"
-        android:layout_marginEnd="14dp" />
+        tools:layout_constraintTop_creator="1" />
 
     <ScrollView
         android:layout_width="373dp"
@@ -47,7 +46,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <EditText
                 android:id="@+id/editPlanName"
@@ -65,7 +64,6 @@
                 tools:layout_constraintTop_creator="1" />
 
             <TextView
-                android:id="@+id/stepsHeading"
                 android:layout_width="match_parent"
                 android:layout_height="42dp"
                 android:layout_marginLeft="8dp"
@@ -90,7 +88,6 @@
                 tools:layout_editor_absoluteY="118dp" />
 
             <TextView
-                android:id="@+id/medsHeading"
                 android:layout_width="match_parent"
                 android:layout_height="42dp"
                 android:layout_marginLeft="8dp"
@@ -115,7 +112,6 @@
                 tools:layout_editor_absoluteY="118dp" />
 
             <TextView
-                android:id="@+id/otherHeading"
                 android:layout_width="match_parent"
                 android:layout_height="42dp"
                 android:layout_marginLeft="8dp"
