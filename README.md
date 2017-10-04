@@ -2,10 +2,11 @@
 Disaster App For Medical Preparedness Project
 
 ## Sections
-1. [Project Introduction](https://github.com/JID-7155/DAMP/new/master?readme=1#project-introduction)
-2. [Navigating Classes and Activities](https://github.com/JID-7155/DAMP/new/master?readme=1#navigating-classes-and-activities)
-3. [Relevant Terminology](https://github.com/JID-7155/DAMP/new/master?readme=1#relevant-terminology)
-4. [Frequently Asked Questions (FAQ)](https://github.com/JID-7155/DAMP/new/master?readme=1#faq)
+1. [Project Introduction](https://github.com/JID-7155/DAMP#project-introduction)
+
+2. [Navigating Classes and Activities](https://github.com/JID-7155/DAMP#navigating-classes-and-activities)
+3. [Relevant Terminology](https://github.com/JID-7155/DAMP#relevant-terminology)
+4. [Frequently Asked Questions (FAQ)](https://github.com/JID-7155/DAMP#faq)
 
 
 ## Project Introduction
