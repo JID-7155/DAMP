@@ -135,7 +135,7 @@ public class JSONService {
     public void deleteSection(Context context, int position) {
         try {
             String fullFilePath = context.getFilesDir() + File.separator + "plans.json";
-            if(isFilePresent(context, "plans.json")) {
+            if (isFilePresent(context, "plans.json")) {
                 FileReader readMe = new FileReader(context.getFilesDir() + File.separator + "plans.json");
                 JSONArray currentJson = (JSONArray) parser.parse(readMe);
                 currentJson.remove(position);

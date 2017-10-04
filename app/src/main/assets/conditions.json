@@ -1,25 +1,26 @@
 [
   {
-     "Name":"Stroke"
-    ,"Steps":"1. Check for signs of stroke. Does the face droop when you try to smile? Does an arm drop when you try to raise both hands? Is the speech slurred? \n\n2. If any of the above questions are 'yes', call 911 immediately and let them know what time the stroke began."
-    ,"Medications":""
-    ,"Other Notes":"Time is of the essence. Calling a doctor or driving to the hospital yourself may waste precious time. Ambulance workers can judge the situation faster and get you the treatment you need."
+    "Name": "Stroke",
+    "Steps": "1. Check for signs of stroke. Does the face droop when you try to smile? Does an arm drop when you try to raise both hands? Is the speech slurred? \n\n2. If any of the above questions are 'yes', call 911 immediately and let them know what time the stroke began.",
+    "Medications": "",
+    "Other Notes": "Time is of the essence. Calling a doctor or driving to the hospital yourself may waste precious time. Ambulance workers can judge the situation faster and get you the treatment you need."
   },
   {
-     "Name":"Asthma"
-    ,"Steps":"1. Keep Calm\n\n2. Help the victim sit up in order to have less obstructed airways\n\n3. Eliminate the trigger - There several triggers that could be potentially causing the asthma attack (pollen, dust mites, mold, feathers, etc). If you don't know what it could be, ask the victim directly if possible. If you do know, remove the person from the effects of the trigger as soon as possible.\n\n4. Use any emergency medicines the person may have on them. Be sure to read their labels and follow directions. Ask the person about their action plans.\n\n5. If the situation does not improve or worsens, call 911."
-    ,"Medications":"Rescue Inhaler"
-    ,"Other Notes":"Sources: \nhttps://www.everydayhealth.com/asthma/how-to-help-someone-having-an-asthma-attack.aspx\nhttps://tribune.com.pk/story/890516/5-steps-to-survive-an-asthma-attack-without-an-inhaler/"
+    "Name": "Asthma",
+    "Steps": "1. Keep Calm\n\n2. Help the victim sit up in order to have less obstructed airways\n\n3. Eliminate the trigger - There several triggers that could be potentially causing the asthma attack (pollen, dust mites, mold, feathers, etc). If you don't know what it could be, ask the victim directly if possible. If you do know, remove the person from the effects of the trigger as soon as possible.\n\n4. Use any emergency medicines the person may have on them. Be sure to read their labels and follow directions. Ask the person about their action plans.\n\n5. If the situation does not improve or worsens, call 911.",
+    "Medications": "Rescue Inhaler",
+    "Other Notes": "Sources: \nhttps://www.everydayhealth.com/asthma/how-to-help-someone-having-an-asthma-attack.aspx\nhttps://tribune.com.pk/story/890516/5-steps-to-survive-an-asthma-attack-without-an-inhaler/"
   },
   {
-     "Name":"Appendicitis"
-    ,"Steps":"1. As soon as the condition is discovered, get medical attention immediately.\n\n2. Do not eat, drink, or use any pain remedies, antacids, laxatives, or heating pads, which can cause an inflamed appendix to rupture."
-    ,"Medications":""
-    ,"Other Notes":"Source:\nhttp://www.webmd.com/digestive-disorders/digestive-diseases-appendicitis#1"
+    "Name": "Appendicitis",
+    "Steps": "1. As soon as the condition is discovered, get medical attention immediately.\n\n2. Do not eat, drink, or use any pain remedies, antacids, laxatives, or heating pads, which can cause an inflamed appendix to rupture.",
+    "Medications": "",
+    "Other Notes": "Source:\nhttp://www.webmd.com/digestive-disorders/digestive-diseases-appendicitis#1"
   },
   {
-     "Name":"Seizure"
-    ,"Steps":"During:\n1. If a person around is having a seizure, protect them from injury. Keep them from falling or try to guide them gently to the floor. \n\n2. If the person is on the ground, try to position the person on their side so that fluid can leak out of the mouth.\n\n3. Do not force anything into the person's mouth.\n\n4. Do not try to hold down the person\n\n5. If the person is pregnant or the seizure lasts for more than 5 minutes, call medical services immediately\n\nAfter:\n1. Check for injuries.\n\n2. If the person could not be moved to their side, move them at this point.\n\n3. Make sure the person is in a place to rest.\n\n4. Do not offer food or drink until the person is fully awake and alert."
-    ,"Medications":""
-    ,"Other Notes":"Source: http://www.webmd.com/epilepsy/tc/helping-a-person-during-an-epileptic-seizure-topic-overview"
-  }]
+    "Name": "Seizure",
+    "Steps": "During:\n1. If a person around is having a seizure, protect them from injury. Keep them from falling or try to guide them gently to the floor. \n\n2. If the person is on the ground, try to position the person on their side so that fluid can leak out of the mouth.\n\n3. Do not force anything into the person's mouth.\n\n4. Do not try to hold down the person\n\n5. If the person is pregnant or the seizure lasts for more than 5 minutes, call medical services immediately\n\nAfter:\n1. Check for injuries.\n\n2. If the person could not be moved to their side, move them at this point.\n\n3. Make sure the person is in a place to rest.\n\n4. Do not offer food or drink until the person is fully awake and alert.",
+    "Medications": "",
+    "Other Notes": "Source: http://www.webmd.com/epilepsy/tc/helping-a-person-during-an-epileptic-seizure-topic-overview"
+  }
+]
