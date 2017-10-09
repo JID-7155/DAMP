@@ -15,6 +15,8 @@ import com.ad_revenue.damp.Services.JSONService;
 
 public class Plan_Screen extends AppCompatActivity {
 
+    private String patientName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +25,7 @@ public class Plan_Screen extends AppCompatActivity {
         Context myContext = getApplicationContext();
         JSONService myJSON = new JSONService();
 
-        String[] steps = myJSON.getInternalProperties(myContext, "plans.json", "Steps");
+        String[] steps = myJSON.getInternalPlanProperties(myContext, patientName, "Steps");
         int planNumber = getIntent().getIntExtra("indexInto", 0);
         String[] stringSteps = steps[planNumber].split("\\\\r?\\\\n");
 
@@ -32,7 +34,7 @@ public class Plan_Screen extends AppCompatActivity {
         listView.setAdapter(adapter);
 
         TextView planTitle = (TextView) findViewById(R.id.planNameText);
-        planTitle.setText(myJSON.getInternalProperties(myContext, "plans.json", "Name")[planNumber]);
+        planTitle.setText(myJSON.getInternalPlanProperties(myContext, patientName, "Name")[planNumber]);
     }
 
     private class CustomAdapter extends ArrayAdapter<String> {

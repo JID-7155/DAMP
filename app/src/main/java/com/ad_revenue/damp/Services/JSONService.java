@@ -14,6 +14,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 public class JSONService {
@@ -23,14 +24,69 @@ public class JSONService {
         //Leaving this here just in case.
     }
 
-    private boolean isFilePresent(Context context, String fileName) {
-        String path = context.getFilesDir() + File.separator + fileName;
+    private boolean isFilePresent(Context context, String patientName, String fileName) {
+        String path = getPatientDir(context, patientName) + File.separator + fileName;
         File file = new File(path);
         return file.exists();
     }
 
+    private boolean isPlansPresent(Context context, String patientName) {
+        String path = getPatientPlans(context, patientName);
+        File file = new File(path);
+        return file.exists();
+    }
+
+    private boolean isPatientInfoPresent(Context context, String patientName) {
+        String path = getPatientInfo(context, patientName);
+        File file = new File(path);
+        return file.exists();
+    }
+
+    private boolean createPatient(Context context, String patientName) {
+        File newDir = new File(context.getFilesDir() + File.separator + "Patients" + File.separator + patientName);
+        return newDir.mkdir();
+    }
+
+    private boolean createPlan(Context context, String patientName, String planName) {
+        File newDir = new File(context.getFilesDir() + File.separator + "Patients" + File.separator + patientName + File.separator + planName + ".json");
+        try {
+            return newDir.createNewFile();
+        } catch (IOException e) {
+            return false;
+        }
+    }
+
+    private String getPatientsDir(Context context) {
+        return context.getFilesDir() + File.separator + "Patients" + File.separator;
+    }
+
+    private String getPatientDir(Context context, String patient) {
+        return context.getFilesDir() + File.separator + "Patients" + File.separator + patient + File.separator;
+    }
+
+    private String getPatientPlans(Context context, String patientName) {
+        return getPatientDir(context, patientName) + File.separator + (patientName + "Plans.json");
+    }
+
+    private String getPatientInfo(Context context, String patientName) {
+        return getPatientDir(context, patientName) + File.separator + (patientName + "Info.json");
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////////
+
+    public String[] getPatientNames(Context context) {
+        ArrayList<String> toReturn = new ArrayList<>();
+
+        for(File file : (new File(context.getFilesDir() + File.separator + "Patients").listFiles()))
+        {
+            toReturn.add(file.getName());
+        }
+
+        return toReturn.toArray(new String[toReturn.size()]);
+    }
+
     @SuppressWarnings("unchecked")
-    public void writeToPlans(Context context, String newName, String newSteps, String newMedications, String newOthers) {
+    public void writeToPlans(Context context, String patientName, String newName, String newSteps, String newMedications, String newOthers) {
         try {
             JSONObject section = new JSONObject();
 
@@ -39,9 +95,9 @@ public class JSONService {
             section.put("Steps", newSteps);
             section.put("Name", newName);
 
-            String fullFilePath = context.getFilesDir() + File.separator + "plans.json";
-            if (isFilePresent(context, "plans.json")) {
-                FileReader readMe = new FileReader(context.getFilesDir() + File.separator + "plans.json");
+            String fullFilePath = getPatientPlans(context, patientName);
+            if (isPlansPresent(context, patientName)) {
+                FileReader readMe = new FileReader(getPatientPlans(context, patientName));
                 JSONArray currentJson = (JSONArray) parser.parse(readMe);
                 if (!currentJson.contains(section)) {
                     FileWriter file = new FileWriter(fullFilePath, false);
@@ -67,16 +123,16 @@ public class JSONService {
     }
 
     @SuppressWarnings("unchecked")
-    public void writeToPatients(Context context, String newName, String newAge, String newOtherInfo) {
+    public void writeToPatients(Context context, String patientName, String newName, String newAge, String newOtherInfo) {
         try {
             JSONObject section = new JSONObject();
             section.put("Other Info", newOtherInfo);
             section.put("Age", newAge);
             section.put("Name", newName);
 
-            String fullFilePath = context.getFilesDir() + File.separator + "patients.json";
-            if (isFilePresent(context, "patients.json")) {
-                FileReader readMe = new FileReader(context.getFilesDir() + File.separator + "patients.json");
+            String fullFilePath = getPatientInfo(context, patientName);
+            if (isPatientInfoPresent(context, patientName)) {
+                FileReader readMe = new FileReader(getPatientInfo(context, patientName));
                 JSONArray currentJson = (JSONArray) parser.parse(readMe);
                 if (!currentJson.contains(section)) {
                     FileWriter file = new FileWriter(fullFilePath, false);
@@ -132,11 +188,11 @@ public class JSONService {
         return (String) json.get(propertyName);
     }
 
-    public void deleteSection(Context context, int position) {
+    public void deletePlan(Context context, String patientName, int position) {
         try {
             String fullFilePath = context.getFilesDir() + File.separator + "plans.json";
-            if (isFilePresent(context, "plans.json")) {
-                FileReader readMe = new FileReader(context.getFilesDir() + File.separator + "plans.json");
+            if (isPlansPresent(context, patientName)) {
+                FileReader readMe = new FileReader(getPatientPlans(context, patientName));
                 JSONArray currentJson = (JSONArray) parser.parse(readMe);
                 currentJson.remove(position);
 
@@ -183,10 +239,10 @@ public class JSONService {
         return new String[1];
     }
 
-    public String[] getInternalProperties(Context context, String fileName, String propertyName) {
+    public String[] getInternalPlanProperties(Context context, String patientName, String propertyName) {
         try {
             JSONArray myJson;
-            FileReader file = new FileReader(context.getFilesDir() + File.separator + fileName);
+            FileReader file = new FileReader(getPatientPlans(context, patientName));
             myJson = (JSONArray) parser.parse(file);
             String[] toReturn = new String[myJson.size()];
             Iterator jsonIterator = myJson.iterator();

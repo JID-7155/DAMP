@@ -18,6 +18,7 @@ public class View_Plans extends ListActivity {
     private JSONService myJSON;
     private Context myContext;
     private ListMode currentMode;
+    private String patientName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +27,10 @@ public class View_Plans extends ListActivity {
         currentMode = ListMode.EDIT;
         myContext = getApplicationContext();
         myJSON = new JSONService();
+        patientName = getIntent().getStringExtra("patientName");
 
         setupExamplePlans(myContext, myJSON);
-        String[] plans = myJSON.getInternalProperties(myContext, "plans.json", "Name");
+        String[] plans = myJSON.getInternalPlanProperties(myContext, patientName, "Name");
 
         setContentView(R.layout.activity_view__plans);
         ArrayAdapter adapter = new ArrayAdapter<>(this, R.layout.activity_singleplan, plans);
@@ -54,6 +56,7 @@ public class View_Plans extends ListActivity {
     public void goToPlan(int position) {
         Intent intent = new Intent(this, Plan_Screen.class);
         intent.putExtra("indexInto", position);
+        intent.putExtra("patientName", patientName);
         startActivity(intent);
     }
 
@@ -68,7 +71,7 @@ public class View_Plans extends ListActivity {
     }
 
     public void deletePlan(int position) {
-        myJSON.deleteSection(myContext, position);
+        myJSON.deletePlan(myContext, patientName, position);
         Toast.makeText(myContext, "Plan deleted.", Toast.LENGTH_SHORT).show();
         onResume();
     }
@@ -107,9 +110,9 @@ public class View_Plans extends ListActivity {
     }
 
     protected void setupExamplePlans(Context context, JSONService myJ) {
-        myJ.writeToPlans(context, "Example Plan 1", "1. Brace your core.\n\n2. Squat.", "Aspirin", "Source: Adrian.");
-        myJ.writeToPlans(context, "Example Plan 2", "1. Brace your core.\n\n2. Lift.", "Aspirin", "Source: Adrian.");
-        myJ.writeToPlans(context, "Example Plan 3", "1. Brace your core.\n\n2. Press.", "Aspirin", "Source: Adrian.");
+        myJ.writeToPlans(context, patientName, "Example Plan 1", "1. Brace your core.\n\n2. Squat.", "Aspirin", "Source: Adrian.");
+        myJ.writeToPlans(context, patientName, "Example Plan 2", "1. Brace your core.\n\n2. Lift.", "Aspirin", "Source: Adrian.");
+        myJ.writeToPlans(context, patientName, "Example Plan 3", "1. Brace your core.\n\n2. Press.", "Aspirin", "Source: Adrian.");
         Toast.makeText(context, "Plans loaded.", Toast.LENGTH_SHORT).show();
     }
 
@@ -117,10 +120,10 @@ public class View_Plans extends ListActivity {
     public void onResume() {
         super.onResume();
 
-        String[] stuff = myJSON.getInternalProperties(myContext, "plans.json", "Name");
+        String[] plans = myJSON.getInternalPlanProperties(myContext, patientName, "Name");
 
         setContentView(R.layout.activity_view__plans);
-        ArrayAdapter adapter = new ArrayAdapter<>(this, R.layout.activity_singleplan, stuff);
+        ArrayAdapter adapter = new ArrayAdapter<>(this, R.layout.activity_singleplan, plans);
         ListView listView = this.getListView();
         listView.setAdapter(adapter);
     }
