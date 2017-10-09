@@ -24,16 +24,32 @@ public class JSONService {
         //Leaving this here just in case.
     }
 
+
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    public void createPatient(Context context, String patientName) {
+        File myMainFolder = new File(getPatientDir(context, patientName));
+        myMainFolder.mkdir();
+        File myPlans = new File(getPatientDir(context, patientName) + (patientName + "Plans.json"));
+        File myInfo = new File(getPatientDir(context, patientName) + (patientName + "Info.json"));
+        try {
+            myPlans.createNewFile();
+            myInfo.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Could not create new patient.");
+        }
+    }
+
     private boolean isPlansPresent(Context context, String patientName) {
         String path = getPatientPlans(context, patientName);
         File file = new File(path);
-        return file.exists();
+        return file.exists() && (file.length() > 0);
     }
 
     private boolean isPatientInfoPresent(Context context, String patientName) {
         String path = getPatientInfo(context, patientName);
         File file = new File(path);
-        return file.exists();
+        return file.exists() && (file.length() > 0);
     }
 
     private String getPatientsDir(Context context) {
@@ -53,6 +69,15 @@ public class JSONService {
     }
 
     public String[] getPatientNames(Context context) {
+        File patientHome = new File(getPatientsDir(context));
+        if(!patientHome.exists()) {
+            patientHome.mkdir();
+        } else if(patientHome.length() < 1) {
+            String[] emptyList = new String[1];
+            emptyList[0] = ("Add New Patient");
+            return emptyList;
+        }
+
         ArrayList<String> toReturn = new ArrayList<>();
         toReturn.add("Add New Patient");
         for(File file : (new File(getPatientsDir(context)).listFiles()))
