@@ -15,8 +15,6 @@ import com.ad_revenue.damp.Services.JSONService;
 
 public class Plan_Screen extends AppCompatActivity {
 
-    private String patientName;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +22,7 @@ public class Plan_Screen extends AppCompatActivity {
 
         Context myContext = getApplicationContext();
         JSONService myJSON = new JSONService();
+        String patientName = getIntent().getStringExtra("patientName");
 
         String[] steps = myJSON.getInternalPlanProperties(myContext, patientName, "Steps");
         int planNumber = getIntent().getIntExtra("indexInto", 0);

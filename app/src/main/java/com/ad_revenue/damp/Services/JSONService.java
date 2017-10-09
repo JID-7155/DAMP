@@ -24,12 +24,6 @@ public class JSONService {
         //Leaving this here just in case.
     }
 
-    private boolean isFilePresent(Context context, String patientName, String fileName) {
-        String path = getPatientDir(context, patientName) + File.separator + fileName;
-        File file = new File(path);
-        return file.exists();
-    }
-
     private boolean isPlansPresent(Context context, String patientName) {
         String path = getPatientPlans(context, patientName);
         File file = new File(path);
@@ -42,22 +36,8 @@ public class JSONService {
         return file.exists();
     }
 
-    private boolean createPatient(Context context, String patientName) {
-        File newDir = new File(context.getFilesDir() + File.separator + "Patients" + File.separator + patientName);
-        return newDir.mkdir();
-    }
-
-    private boolean createPlan(Context context, String patientName, String planName) {
-        File newDir = new File(context.getFilesDir() + File.separator + "Patients" + File.separator + patientName + File.separator + planName + ".json");
-        try {
-            return newDir.createNewFile();
-        } catch (IOException e) {
-            return false;
-        }
-    }
-
     private String getPatientsDir(Context context) {
-        return context.getFilesDir() + File.separator + "Patients" + File.separator;
+        return context.getFilesDir() + File.separator + "Patients";
     }
 
     private String getPatientDir(Context context, String patient) {
@@ -65,23 +45,20 @@ public class JSONService {
     }
 
     private String getPatientPlans(Context context, String patientName) {
-        return getPatientDir(context, patientName) + File.separator + (patientName + "Plans.json");
+        return getPatientDir(context, patientName) + (patientName + "Plans.json");
     }
 
     private String getPatientInfo(Context context, String patientName) {
-        return getPatientDir(context, patientName) + File.separator + (patientName + "Info.json");
+        return getPatientDir(context, patientName) + (patientName + "Info.json");
     }
-
-    /////////////////////////////////////////////////////////////////////////////////////////
 
     public String[] getPatientNames(Context context) {
         ArrayList<String> toReturn = new ArrayList<>();
-
-        for(File file : (new File(context.getFilesDir() + File.separator + "Patients").listFiles()))
+        toReturn.add("Add New Patient");
+        for(File file : (new File(getPatientsDir(context)).listFiles()))
         {
             toReturn.add(file.getName());
         }
-
         return toReturn.toArray(new String[toReturn.size()]);
     }
 
@@ -97,7 +74,7 @@ public class JSONService {
 
             String fullFilePath = getPatientPlans(context, patientName);
             if (isPlansPresent(context, patientName)) {
-                FileReader readMe = new FileReader(getPatientPlans(context, patientName));
+                FileReader readMe = new FileReader(fullFilePath);
                 JSONArray currentJson = (JSONArray) parser.parse(readMe);
                 if (!currentJson.contains(section)) {
                     FileWriter file = new FileWriter(fullFilePath, false);
@@ -132,7 +109,7 @@ public class JSONService {
 
             String fullFilePath = getPatientInfo(context, patientName);
             if (isPatientInfoPresent(context, patientName)) {
-                FileReader readMe = new FileReader(getPatientInfo(context, patientName));
+                FileReader readMe = new FileReader(fullFilePath);
                 JSONArray currentJson = (JSONArray) parser.parse(readMe);
                 if (!currentJson.contains(section)) {
                     FileWriter file = new FileWriter(fullFilePath, false);
@@ -190,9 +167,9 @@ public class JSONService {
 
     public void deletePlan(Context context, String patientName, int position) {
         try {
-            String fullFilePath = context.getFilesDir() + File.separator + "plans.json";
+            String fullFilePath = getPatientPlans(context, patientName);
             if (isPlansPresent(context, patientName)) {
-                FileReader readMe = new FileReader(getPatientPlans(context, patientName));
+                FileReader readMe = new FileReader(fullFilePath);
                 JSONArray currentJson = (JSONArray) parser.parse(readMe);
                 currentJson.remove(position);
 

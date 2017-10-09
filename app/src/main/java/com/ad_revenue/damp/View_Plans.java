@@ -86,6 +86,7 @@ public class View_Plans extends ListActivity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         Intent intent = new Intent(getApplicationContext(), Create_Screen.class);
+                        intent.putExtra("patientName", patientName);
                         startActivity(intent);
                     }
                 });
@@ -94,6 +95,7 @@ public class View_Plans extends ListActivity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         Intent intent = new Intent(getApplicationContext(), Template_Screen.class);
+                        intent.putExtra("patientName", patientName);
                         startActivity(intent);
                     }
                 });

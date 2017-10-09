@@ -56,7 +56,7 @@ public class Create_Screen extends AppCompatActivity {
         EditText planOther = (EditText) findViewById(R.id.editOther);
         String other = planOther.getText().toString();
 
-        myJSON.writeToPlans(myContext, name, steps, meds, other);
+        myJSON.writeToPlans(myContext, getIntent().getStringExtra("patientName"), name, steps, meds, other);
 
         Toast.makeText(myContext, "New Plan Created.", Toast.LENGTH_SHORT).show();
         finish();
