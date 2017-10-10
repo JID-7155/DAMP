@@ -41,6 +41,7 @@ public class Template_Screen extends ListActivity {
 
         template = true;
         intent.putExtra("template", true);
+        intent.putExtra("patientName", getIntent().getStringExtra("patientName"));
 
         startActivity(intent);
     }

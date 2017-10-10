@@ -4,4 +4,6 @@
     <string name="title_activity_create__screen">Create_Screen</string>
     <string name="plan_name">Plan Name</string>
     <string name="title_activity_template__screen">Template_Screen</string>
+    <string name="submit">Create New Patient</string>
+    <string name="cancel">Cancel</string>
 </resources>

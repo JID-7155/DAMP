@@ -13,7 +13,6 @@ public class Edit_Patient_Screen extends AppCompatActivity {
     JSONService jsonService;
     Context context;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +32,7 @@ public class Edit_Patient_Screen extends AppCompatActivity {
         EditText ageText = (EditText) ageForm.findViewById(R.id.ageText);
         EditText miscText = (EditText) miscForm.findViewById(R.id.miscText);
 
-        jsonService.writeToPatients(this.context, nameText.getText().toString(), ageText.getText().toString(), miscText.getText().toString());
+        jsonService.writeToPatients(this.context, getIntent().getStringExtra("patientName"),  nameText.getText().toString(), ageText.getText().toString(), miscText.getText().toString());
         Toast.makeText(context, "Patient Information saved successfully.", Toast.LENGTH_SHORT).show();
         finish();
     }
