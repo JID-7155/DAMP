@@ -90,7 +90,7 @@ public class Create_Screen extends AppCompatActivity {
             /*
             myJSON.editPlans(myContext, getIntent.getIntExtra("indexInto"), getIntent().getStringExtra("patientName"), name, steps, meds, other);
              */
-            onResume();
+            //onResume();
             Toast.makeText(myContext, "Plan Edited", Toast.LENGTH_SHORT).show();
         } else {
             myJSON.writeToPlans(myContext, getIntent().getStringExtra("patientName"), name, steps, meds, other);
