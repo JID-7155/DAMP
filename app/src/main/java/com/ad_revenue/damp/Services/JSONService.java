@@ -46,7 +46,7 @@ public class JSONService {
         return file.exists() && (file.length() > 0);
     }
 
-    private boolean isPatientInfoPresent(Context context, String patientName) {
+    public boolean isPatientInfoPresent(Context context, String patientName) {
         String path = getPatientInfo(context, patientName);
         File file = new File(path);
         return file.exists() && (file.length() > 0);
@@ -85,6 +85,27 @@ public class JSONService {
             toReturn.add(file.getName());
         }
         return toReturn.toArray(new String[toReturn.size()]);
+    }
+
+    public ArrayList<String> getPatientInformation(Context context, String patientName) {
+        try {
+            FileReader readMe = new FileReader(getPatientInfo(context, patientName));
+            JSONArray currentJson = (JSONArray) parser.parse(readMe);
+
+            ArrayList<String> patientInfo = new ArrayList<>();
+            patientInfo.add((String) ((JSONObject) currentJson.get(0)).get("Name"));
+            patientInfo.add((String) ((JSONObject) currentJson.get(0)).get("Age"));
+            patientInfo.add((String) ((JSONObject) currentJson.get(0)).get("Other Info"));
+            readMe.close();
+            return patientInfo;
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error reading patient information.");
+        } catch (ParseException e) {
+            e.printStackTrace();
+            System.out.println("Error parsing patient information.");
+        }
+        return new ArrayList<String>();
     }
 
     @SuppressWarnings("unchecked")
