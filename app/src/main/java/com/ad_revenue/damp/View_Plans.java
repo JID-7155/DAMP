@@ -65,6 +65,12 @@ public class View_Plans extends ListActivity {
         startActivity(intent);
     }
 
+    public void goToEditPatient(View v) {
+        Intent intent = new Intent(this, Edit_Patient_Screen.class);
+        intent.putExtra("patientName", patientName);
+        startActivity(intent);
+    }
+
     public void switchMode(View v) {
         if (currentMode != ListMode.DELETE) {
             currentMode = ListMode.DELETE;
