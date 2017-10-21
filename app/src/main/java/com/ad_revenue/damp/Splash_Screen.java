@@ -122,4 +122,9 @@ public class Splash_Screen extends AppCompatActivity {
             }
         }
     }
+
+    public void goToMap(View view) {
+        Intent intent = new Intent(myContext, Map_Screen.class);
+        startActivity(intent);
+    }
 }
