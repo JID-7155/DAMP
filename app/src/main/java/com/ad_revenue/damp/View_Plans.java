@@ -34,7 +34,6 @@ public class View_Plans extends ListActivity {
             myJSON.createPatient(myContext, patientName);
         }
 
-        setupExamplePlans(myContext, myJSON);
         String[] plans = myJSON.getInternalPlanProperties(myContext, patientName, "Name");
 
         setContentView(R.layout.activity_view__plans);

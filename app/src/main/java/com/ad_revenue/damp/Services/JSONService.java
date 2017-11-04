@@ -90,12 +90,12 @@ public class JSONService {
     public ArrayList<String> getPatientInformation(Context context, String patientName) {
         try {
             FileReader readMe = new FileReader(getPatientInfo(context, patientName));
-            JSONArray currentJson = (JSONArray) parser.parse(readMe);
+            JSONObject currentJson = (JSONObject) parser.parse(readMe);
 
             ArrayList<String> patientInfo = new ArrayList<>();
-            patientInfo.add((String) ((JSONObject) currentJson.get(0)).get("Name"));
-            patientInfo.add((String) ((JSONObject) currentJson.get(0)).get("Age"));
-            patientInfo.add((String) ((JSONObject) currentJson.get(0)).get("Other Info"));
+            patientInfo.add((String) currentJson.get("Name"));
+            patientInfo.add((String) currentJson.get("Age"));
+            patientInfo.add((String) currentJson.get("Other Info"));
             readMe.close();
             return patientInfo;
         } catch (IOException e) {
@@ -154,29 +154,14 @@ public class JSONService {
             section.put("Name", newName);
 
             String fullFilePath = getPatientInfo(context, patientName);
-            if (isPatientInfoPresent(context, patientName)) {
-                FileReader readMe = new FileReader(fullFilePath);
-                JSONArray currentJson = (JSONArray) parser.parse(readMe);
-                if (!currentJson.contains(section)) {
-                    FileWriter file = new FileWriter(fullFilePath, false);
-                    currentJson.add(section);
-                    file.write(currentJson.toJSONString());
-                    file.close();
-                }
-                readMe.close();
-            } else {
-                FileWriter file = new FileWriter(fullFilePath, false);
-                JSONArray myArray = new JSONArray();
-                myArray.add(section);
-                file.write(myArray.toJSONString());
-                file.close();
-            }
+
+            FileWriter file = new FileWriter(fullFilePath, false);
+            file.write(section.toJSONString());
+            file.close();
+
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Error reading/writing to file.");
-        } catch (ParseException e) {
-            e.printStackTrace();
-            System.out.println("Error reading file.");
         }
     }
 
