@@ -1,6 +1,7 @@
 package com.ad_revenue.damp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -15,8 +16,11 @@ import com.ad_revenue.damp.Services.JSONService;
 
 public class Plan_Screen extends AppCompatActivity {
 
+    private boolean edited;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        edited = false;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plan__screen);
 
@@ -60,6 +64,23 @@ public class Plan_Screen extends AppCompatActivity {
                 return row;
             }
             return convertView;
+        }
+    }
+
+    public void editCurrentPlan(View view) {
+        edited = true;
+        Intent intent = new Intent(this, Create_Screen.class);
+        intent.putExtra("indexInto", getIntent().getIntExtra("indexInto", 0));
+        intent.putExtra("patientName", getIntent().getStringExtra("patientName"));
+        intent.putExtra("edit", true);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (edited) {
+            finish();
         }
     }
 }

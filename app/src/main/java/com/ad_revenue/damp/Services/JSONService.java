@@ -196,6 +196,33 @@ public class JSONService {
         return (String) json.get(propertyName);
     }
 
+    public void editPlan(Context context, int position, String patientName,
+                         String newName, String newSteps, String newMedications, String newOthers) {
+        /*
+        try {
+            FileReader file = new FileReader(getPatientPlans(context, patientName));
+            JSONArray myJson = (JSONArray) parser.parse(file);
+
+
+
+            toReturn[0] = getProperty("Name", myJson.get(index));
+            toReturn[1] = getProperty("Steps", myJson.get(index));
+            toReturn[2] = getProperty("Medications", myJson.get(index));
+            toReturn[3] = getProperty("Other Notes", myJson.get(index));
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+            System.out.println("Error parsing file.");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error reading/writing to file.");
+        }
+        */
+    }
+
     public void deletePlan(Context context, String patientName, int position) {
         try {
             String fullFilePath = getPatientPlans(context, patientName);
