@@ -27,28 +27,40 @@ public class Edit_Patient_Screen extends AppCompatActivity {
                 add(0, getIntent().getStringExtra("patientName"));
                 add(1, "");
                 add(2, "");
+                add(3, "name");
+                add(4, "address");
             }};
         } else {
             properties = jsonService.getPatientInformation(context, getIntent().getStringExtra("patientName"));
         }
+        View hospitalForm = findViewById(R.id.hospitalForm);
+
         EditText nameText = (EditText) findViewById(R.id.nameForm).findViewById(R.id.nameText);
         EditText ageText = (EditText) findViewById(R.id.ageForm).findViewById(R.id.ageText);
         EditText miscText = (EditText) findViewById(R.id.miscForm).findViewById(R.id.miscText);
+        EditText hospitalNameText = (EditText) hospitalForm.findViewById(R.id.hospitalNameText);
+        EditText hospitalAddressText = (EditText) hospitalForm.findViewById(R.id.hospitalAddressText);
         nameText.setText(properties.get(0));
         ageText.setText(properties.get(1));
         miscText.setText(properties.get(2));
+        hospitalNameText.setText(properties.get(3));
+        hospitalAddressText.setText(properties.get(4));
     }
 
     public void savePatientInformation(View view) {
         View nameForm = findViewById(R.id.nameForm);
         View ageForm = findViewById(R.id.ageForm);
         View miscForm = findViewById(R.id.miscForm);
+        View hospitalForm = findViewById(R.id.hospitalForm);
 
         EditText nameText = (EditText) nameForm.findViewById(R.id.nameText);
         EditText ageText = (EditText) ageForm.findViewById(R.id.ageText);
         EditText miscText = (EditText) miscForm.findViewById(R.id.miscText);
+        EditText hospitalNameText = (EditText) hospitalForm.findViewById(R.id.hospitalNameText);
+        EditText hospitalAddressText = (EditText) hospitalForm.findViewById(R.id.hospitalAddressText);
 
-        jsonService.writeToPatients(this.context, getIntent().getStringExtra("patientName"),  nameText.getText().toString(), ageText.getText().toString(), miscText.getText().toString());
+        jsonService.writeToPatients(this.context, getIntent().getStringExtra("patientName"),  nameText.getText().toString(), ageText.getText().toString(), miscText.getText().toString()
+        , hospitalNameText.getText().toString(), hospitalAddressText.getText().toString());
         Toast.makeText(context, "Patient Information saved successfully.", Toast.LENGTH_SHORT).show();
         finish();
     }

@@ -33,6 +33,8 @@ public class View_Plans extends ListActivity {
         if(isNew) {
             myJSON.createPatient(myContext, patientName);
         }
+        setupExamplePlans(this, myJSON);
+
 
         String[] plans = myJSON.getInternalPlanProperties(myContext, patientName, "Name");
 
