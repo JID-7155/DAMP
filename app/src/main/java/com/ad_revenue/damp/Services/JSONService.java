@@ -70,9 +70,9 @@ public class JSONService {
 
     public String[] getPatientNames(Context context) {
         File patientHome = new File(getPatientsDir(context));
-        if(!patientHome.exists()) {
+        if (!patientHome.exists()) {
             patientHome.mkdir();
-        } else if(patientHome.length() < 1) {
+        } else if (patientHome.length() < 1) {
             String[] emptyList = new String[1];
             emptyList[0] = ("Add New Patient");
             return emptyList;
@@ -80,8 +80,7 @@ public class JSONService {
 
         ArrayList<String> toReturn = new ArrayList<>();
         toReturn.add("Add New Patient");
-        for(File file : (new File(getPatientsDir(context)).listFiles()))
-        {
+        for (File file : (new File(getPatientsDir(context)).listFiles())) {
             toReturn.add(file.getName());
         }
         return toReturn.toArray(new String[toReturn.size()]);
@@ -152,7 +151,7 @@ public class JSONService {
 
     @SuppressWarnings("unchecked")
     public void writeToPatients(Context context, String patientName, String newName, String newAge, String newOtherInfo,
-                               String hospitalName, String hospitalAddress ) {
+                                String hospitalName, String hospitalAddress) {
         try {
             JSONObject hospitalObject = new JSONObject();
             hospitalObject.put("Hospital Name", hospitalName);
@@ -163,7 +162,6 @@ public class JSONService {
             section.put("Other Info", newOtherInfo);
             section.put("Age", newAge);
             section.put("Name", newName);
-
 
 
             String fullFilePath = getPatientInfo(context, patientName);
