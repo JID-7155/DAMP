@@ -27,14 +27,37 @@ public class Edit_Patient_Screen extends AppCompatActivity {
         setContentView(R.layout.activity_edit__patient__screen);
 
         updateProperties();
-
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         updateProperties();
+
+        if (!jsonService.isPatientInfoPresent(context, getIntent().getStringExtra("patientName"))) {
+            properties = new ArrayList<String>(){{
+                add(0, getIntent().getStringExtra("patientName"));
+                add(1, "");
+                add(2, "");
+                add(3, "");
+                add(4, "");
+            }};
+        } else {
+            properties = jsonService.getPatientInformation(context, getIntent().getStringExtra("patientName"));
+        }
+
+        EditText nameText = (EditText) findViewById(R.id.nameForm).findViewById(R.id.nameText);
+        EditText ageText = (EditText) findViewById(R.id.ageForm).findViewById(R.id.ageText);
+        EditText miscText = (EditText) findViewById(R.id.miscForm).findViewById(R.id.miscText);
+        View hForm = findViewById(R.id.hospitalForm);
+        EditText hospitalNameText = (EditText) hForm.findViewById((R.id.hospitalNameText));
+        EditText hospitalAddressText = (EditText) hForm.findViewById(R.id.hospitalAddressText);
+
+        nameText.setText(properties.get(0));
+        ageText.setText(properties.get(1));
+        miscText.setText(properties.get(2));
+        hospitalNameText.setText(properties.get(3));
+        hospitalAddressText.setText(properties.get(4));
     }
 
     public void savePatientInformation(View view) {
