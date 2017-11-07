@@ -1,7 +1,11 @@
 package com.ad_revenue.damp;
 
 import android.*;
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Criteria;
@@ -20,9 +24,13 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.ad_revenue.damp.Services.JSONService;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
@@ -47,20 +55,34 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Map_Screen extends AppCompatActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
+
+    Context myContext = this;
+    JSONService myJSONService;
     GoogleMap map;
     MapView mMapView;
-    LocationManager mLocationManager;
     Geocoder mGeocoder;
+    LocationManager mLocationManager;
     GoogleApiClient mGoogleApiClient;
     LocationRequest mLocationRequest;
     Location mLastLocation;
     Marker mCurrLocationMarker;
+    Marker mPreferredHospitalMarker;
     public List<HashMap<String, String>> nearbyPlaces;
+
+    ArrayList<String> patientProperties;
+    String patientName;
+
+    String preferredHospitalName;
+    String preferredHospitalAddress;
+    LatLng preferredHospitalLocation;
+
+    ListView hospitalListView;
 
     private final int PROXIMITY_RADIUS = 10000;
 
@@ -70,6 +92,10 @@ public class Map_Screen extends AppCompatActivity implements OnMapReadyCallback,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map__screen);
+        myJSONService = new JSONService();
+        mGeocoder = new Geocoder(this);
+        setHospitalListView();
+
 
         mMapView = (MapView) findViewById(R.id.map);
         mMapView.onCreate(savedInstanceState);
@@ -88,6 +114,85 @@ public class Map_Screen extends AppCompatActivity implements OnMapReadyCallback,
 
     }
 
+    public void setHospitalListView() {
+        hospitalListView = (ListView)this.findViewById(R.id.addressList);
+
+        hospitalListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+                String addressText = nearbyPlaces.get(position).get("vicinity");
+                String name = nearbyPlaces.get(position).get("place_name");
+
+                System.out.println(name);
+
+                try {
+                    List<Address> address = mGeocoder.getFromLocationName(addressText, 1);
+                    zoomToLocation(address.get(0).getLatitude(), address.get(0).getLongitude());
+                } catch(IOException e) {
+                    e.printStackTrace();
+                    System.out.println("Could not retrieve response from Geocoder.");
+                }
+            }
+        });
+
+        hospitalListView.setOnItemLongClickListener( new AdapterView.OnItemLongClickListener() {
+
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id){
+                String addressText = nearbyPlaces.get(position).get("vicinity");
+                String name = nearbyPlaces.get(position).get("place_name");
+                System.out.println("LONG BOI ACTIVATED");
+
+                if(addressText != null)
+                    saveAddressInformation(name,addressText);
+
+                return true;
+            }
+        });
+    }
+
+    public void updatePreferredHospitalInfo() {
+
+        if(patientName != null) {
+            patientProperties = myJSONService.getPatientInformation(myContext, patientName);
+        } else {
+            patientProperties = getIntent().getStringArrayListExtra("patientProperties");
+            patientName = patientProperties.get(0);
+        }
+        preferredHospitalName = patientProperties.get(3);
+        preferredHospitalAddress = patientProperties.get(4);
+        TextView preferredHospitalNameText = (TextView) findViewById(R.id.preferredHospitalNameText);
+        TextView preferredHospitalAddressText = (TextView) findViewById(R.id.preferredHospitalAddressText);
+        LinearLayout preferredHospitalClickable = (LinearLayout) findViewById(R.id.preferredHospitalClickable);
+
+        if (!preferredHospitalName.equals(""))
+            preferredHospitalNameText.setText(preferredHospitalName);
+
+        if (!preferredHospitalAddress.equals("")) {
+            preferredHospitalAddressText.setText(preferredHospitalAddress);
+        } else {
+            preferredHospitalClickable.setClickable(false);
+        }
+
+        try {
+            List<Address> address = mGeocoder.getFromLocationName(preferredHospitalAddress, 1);
+            preferredHospitalLocation = new LatLng(address.get(0).getLatitude(), address.get(0).getLongitude());
+        } catch(IOException e) {
+            e.printStackTrace();
+            System.out.println("Could not retrieve response from Geocoder.");
+        }
+
+
+        if (preferredHospitalLocation != null) {
+
+            MarkerOptions markerOptions = new MarkerOptions();
+            markerOptions.position(preferredHospitalLocation);
+            markerOptions.title(preferredHospitalName);
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+            mPreferredHospitalMarker = map.addMarker(markerOptions);
+        }
+    }
+
     public void setPlacesList(List<HashMap<String, String>> list) {
         nearbyPlaces = list;
     }
@@ -95,11 +200,40 @@ public class Map_Screen extends AppCompatActivity implements OnMapReadyCallback,
     public void populateListView() {
         List<String> addresses = new ArrayList<>();
         for (HashMap<String, String> place : nearbyPlaces) {
-            addresses.add(place.get("vicinity"));
+            addresses.add(place.get("place_name"));
         }
         ArrayAdapter adapter = new ArrayAdapter<>(this, R.layout.activity_singleplan, addresses);
-        ListView listView = (ListView)this.findViewById(R.id.addressList);
-        listView.setAdapter(adapter);
+        hospitalListView.setAdapter(adapter);
+
+
+    }
+
+    public void saveAddressInformation(String hospitalName, String hospitalAddress) {
+        final String name = hospitalName;
+        final String address = hospitalAddress;
+        AlertDialog choice = new AlertDialog.Builder(this).create();
+
+        choice.setTitle("Save Hospital Information");
+        choice.setMessage("Do you want to make this hospital your preferred hospital?");
+
+
+        choice.setButton(AlertDialog.BUTTON_POSITIVE, "Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        myJSONService.writeToPatients(myContext, patientProperties.get(0), patientProperties.get(0), patientProperties.get(1),
+                                patientProperties.get(2),  name, address);
+                        mPreferredHospitalMarker.remove();
+                        updatePreferredHospitalInfo();
+                    }
+                });
+
+        choice.setButton(AlertDialog.BUTTON_NEGATIVE, "No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        choice.show();
     }
 
     @Override
@@ -112,6 +246,7 @@ public class Map_Screen extends AppCompatActivity implements OnMapReadyCallback,
     protected void onResume() {
         super.onResume();
         mMapView.onResume();
+
     }
 
     private boolean CheckGooglePlayServices() {
@@ -153,7 +288,7 @@ public class Map_Screen extends AppCompatActivity implements OnMapReadyCallback,
             map = googleMap;
         }
 
-        map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+        map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
         //Initialize Google Play Services
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -183,23 +318,23 @@ public class Map_Screen extends AppCompatActivity implements OnMapReadyCallback,
     }
 
     public void showNearbyHospitals() {
-        nearbyPlaces = new ArrayList<>();
         map.clear();
+        nearbyPlaces = new ArrayList<>();
         String url = getUrl(mLastLocation.getLatitude(), mLastLocation.getLongitude(), HOSPITAL_QUERY);
         Object[] DataTransfer = new Object[2];
         DataTransfer[0] = map;
         DataTransfer[1] = url;
-        //DataTransfer[2] = nearbyPlaces;
         GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData(this);
         try {
             getNearbyPlacesData.execute(DataTransfer).get();
-            //nearbyPlaces = getNearbyPlacesData.currNearbyPlaces;
 
 
         } catch(Exception e) {
             e.printStackTrace();
             System.out.println("Something realllly bad happened.");
         }
+        updatePreferredHospitalInfo();
+
     }
 
     private String getUrl(double latitude, double longitude, String nearbyPlace) {
@@ -217,18 +352,18 @@ public class Map_Screen extends AppCompatActivity implements OnMapReadyCallback,
                                            String permissions[], int[] grantResults) {
         switch (requestCode) {
             case 1: {
-                // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
                     if (mGoogleApiClient == null) {
                         buildGoogleApiClient();
                     }
-                    map.setMyLocationEnabled(true);
-                    //mLocationManager.requestLocationUpdates(mLocationManager.getBestProvider(new Criteria(), true),400, 1, this);
-
-
-
+                    try {
+                        map.setMyLocationEnabled(true);
+                    } catch (SecurityException e) {
+                        e.printStackTrace();
+                        System.out.println("Location permissions not authorized by user.");
+                    }
                 }
             }
         }
@@ -294,14 +429,31 @@ public class Map_Screen extends AppCompatActivity implements OnMapReadyCallback,
         mCurrLocationMarker = map.addMarker(markerOptions);
 
         //move map camera
-        map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        map.animateCamera(CameraUpdateFactory.zoomTo(11));
+        zoomToLocation(latLng.latitude, latLng.longitude);
         showNearbyHospitals();
 
         //stop location updates
         if (mGoogleApiClient != null) {
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
         }
+    }
 
+    public void zoomToLocation(double lat, double lon) {
+        LatLng latLng = new LatLng(lat, lon);
+        map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        map.animateCamera(CameraUpdateFactory.zoomTo(11));
+    }
+
+    public void goToCurrLocation(View view) {
+        zoomToLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+    }
+
+
+
+    public void goToPreferredHospital(View view) {
+
+        if (preferredHospitalLocation != null) {
+            zoomToLocation(preferredHospitalLocation.latitude, preferredHospitalLocation.longitude);
+        }
     }
 }

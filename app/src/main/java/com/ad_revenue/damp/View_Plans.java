@@ -142,5 +142,10 @@ public class View_Plans extends ListActivity {
         listView.setAdapter(adapter);
     }
 
+    public void goToMap(View view) {
+        Intent intent = new Intent(myContext, Map_Screen.class);
+        startActivity(intent);
+    }
+
     private enum ListMode {EDIT, DELETE}
 }

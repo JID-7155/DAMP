@@ -41,7 +41,7 @@
             android:layout_width="82dp"
             android:layout_height="19dp"
             android:layout_marginLeft="104dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="1dp"
             android:gravity="center"
             android:text="Name "
             app:layout_constraintLeft_toLeftOf="parent"
@@ -49,16 +49,17 @@
 
         <EditText
             android:id="@+id/hospitalNameText"
-            android:layout_width="229dp"
-            android:layout_height="24dp"
+            android:layout_width="227dp"
+            android:layout_height="45dp"
             android:layout_marginEnd="7dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginTop="25dp"
             android:ems="10"
             android:inputType="textMultiLine"
             android:visibility="visible"
-            android:layout_marginRight="7dp"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="32dp" />
+            tools:layout_editor_absoluteX="118dp" />
 
         <TextView
             android:id="@+id/textView"
@@ -73,23 +74,23 @@
 
         <EditText
             android:id="@+id/hospitalAddressText"
-            android:layout_width="229dp"
-            android:layout_height="24dp"
+            android:layout_width="227dp"
+            android:layout_height="45dp"
+            android:layout_marginBottom="16dp"
             android:layout_marginEnd="7dp"
+            android:layout_marginRight="7dp"
             android:ems="10"
             android:inputType="textMultiLine"
             android:visibility="visible"
-            android:layout_marginRight="7dp"
-            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="27dp" />
+            app:layout_constraintRight_toRightOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="26dp"
+        android:layout_marginBottom="16dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:onClick="savePatientInformation"
@@ -98,7 +99,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp" />
+        android:layout_marginEnd="8dp"
+        app:layout_constraintHorizontal_bias="0.962" />
 
     <LinearLayout
         android:layout_width="383dp"
@@ -237,4 +239,15 @@
 
         </android.support.constraint.ConstraintLayout>
     </LinearLayout>
+
+    <Button
+        android:id="@+id/hospitalsButton"
+        android:layout_width="141dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="41dp"
+        android:text="Hospitals"
+        android:onClick="goToMap"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
 </android.support.constraint.ConstraintLayout>
