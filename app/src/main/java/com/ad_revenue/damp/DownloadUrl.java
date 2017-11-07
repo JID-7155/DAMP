@@ -17,20 +17,17 @@ public class DownloadUrl {
 
     public String readUrl(String strUrl) throws IOException {
         String data = "";
-        InputStream iStream = null;
         HttpURLConnection urlConnection = null;
-        try {
-            URL url = new URL(strUrl);
+        URL url = new URL(strUrl);
 
-            // Creating an http connection to communicate with url
-            urlConnection = (HttpURLConnection) url.openConnection();
+        // Creating an http connection to communicate with url
+        urlConnection = (HttpURLConnection) url.openConnection();
 
-            // Connecting to url
-            urlConnection.connect();
+        // Connecting to url
+        urlConnection.connect();
 
-            // Reading data from url
-            iStream = urlConnection.getInputStream();
-
+        // Reading data from url
+        try (InputStream iStream = urlConnection.getInputStream()) {
             BufferedReader br = new BufferedReader(new InputStreamReader(iStream));
 
             StringBuffer sb = new StringBuffer();
@@ -47,7 +44,6 @@ public class DownloadUrl {
         } catch (Exception e) {
             Log.d("Exception", e.toString());
         } finally {
-            iStream.close();
             urlConnection.disconnect();
         }
         return data;

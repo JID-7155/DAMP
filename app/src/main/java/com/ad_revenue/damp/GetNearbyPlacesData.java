@@ -1,8 +1,6 @@
 package com.ad_revenue.damp;
 
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatMultiAutoCompleteTextView;
 import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -10,8 +8,6 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.List;
@@ -29,6 +25,7 @@ public class GetNearbyPlacesData extends AsyncTask<Object, String, String> {
     public GetNearbyPlacesData(Map_Screen activity) {
         this.mActivity = activity;
     }
+
     @Override
     protected String doInBackground(Object... params) {
         try {
@@ -50,7 +47,7 @@ public class GetNearbyPlacesData extends AsyncTask<Object, String, String> {
         Log.d("GooglePlacesReadTask", "onPostExecute Entered");
         List<HashMap<String, String>> nearbyPlacesList = null;
         DataParser dataParser = new DataParser();
-        nearbyPlacesList =  dataParser.parse(result);
+        nearbyPlacesList = dataParser.parse(result);
         mActivity.setPlacesList(nearbyPlacesList);
         mActivity.populateListView();
         ShowNearbyPlaces(nearbyPlacesList);
@@ -62,7 +59,7 @@ public class GetNearbyPlacesData extends AsyncTask<Object, String, String> {
 
         for (int i = 0; i < nearbyPlacesList.size(); i++) {
             //mActivity.nearbyPlaces.add(nearbyPlacesList.get(i));
-            Log.d("onPostExecute","Entered into showing locations");
+            Log.d("onPostExecute", "Entered into showing locations");
             MarkerOptions markerOptions = new MarkerOptions();
             HashMap<String, String> googlePlace = nearbyPlacesList.get(i);
             double lat = Double.parseDouble(googlePlace.get("lat"));

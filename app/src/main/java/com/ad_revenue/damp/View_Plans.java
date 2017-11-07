@@ -30,7 +30,7 @@ public class View_Plans extends ListActivity {
         patientName = getIntent().getStringExtra("patientName");
         boolean isNew = getIntent().getBooleanExtra("isNew", false);
 
-        if(isNew) {
+        if (isNew) {
             myJSON.createPatient(myContext, patientName);
         }
         setupExamplePlans(this, myJSON);

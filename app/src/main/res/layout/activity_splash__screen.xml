@@ -9,14 +9,14 @@
     <include
         android:id="@+id/include"
         layout="@layout/custom_toolbar"
-        android:layout_height="0dp"
         android:layout_width="0dp"
-        app:layout_constraintRight_toLeftOf="parent"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintLeft_creator="1"
+        android:layout_height="0dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintRight_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintTop_creator="1" />
 
     <TextView
         android:id="@+id/splashTitle"
@@ -72,6 +72,7 @@
         tools:layout_constraintRight_creator="1" />
 
     <Button
+        android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="90dp"
@@ -86,8 +87,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
         app:layout_constraintVertical_bias="0.12"
         tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1"
-        android:id="@+id/button" />
+        tools:layout_constraintRight_creator="1" />
 
     <Spinner
         android:id="@+id/patientOptions"

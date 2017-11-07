@@ -40,6 +40,23 @@ public class Plan_Screen extends AppCompatActivity {
         planTitle.setText(myJSON.getInternalPlanProperties(myContext, patientName, "Name")[planNumber]);
     }
 
+    public void editCurrentPlan(View view) {
+        edited = true;
+        Intent intent = new Intent(this, Create_Screen.class);
+        intent.putExtra("indexInto", getIntent().getIntExtra("indexInto", 0));
+        intent.putExtra("patientName", getIntent().getStringExtra("patientName"));
+        intent.putExtra("edit", true);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (edited) {
+            finish();
+        }
+    }
+
     private class CustomAdapter extends ArrayAdapter<String> {
         Context context;
         String[] title;
@@ -64,23 +81,6 @@ public class Plan_Screen extends AppCompatActivity {
                 return row;
             }
             return convertView;
-        }
-    }
-
-    public void editCurrentPlan(View view) {
-        edited = true;
-        Intent intent = new Intent(this, Create_Screen.class);
-        intent.putExtra("indexInto", getIntent().getIntExtra("indexInto", 0));
-        intent.putExtra("patientName", getIntent().getStringExtra("patientName"));
-        intent.putExtra("edit", true);
-        startActivity(intent);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (edited) {
-            finish();
         }
     }
 }

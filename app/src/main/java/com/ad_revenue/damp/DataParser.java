@@ -20,7 +20,7 @@ public class DataParser {
 
         try {
             Log.d("Places", "parse");
-            jsonObject = new JSONObject((String) jsonData);
+            jsonObject = new JSONObject(jsonData);
             jsonArray = jsonObject.getJSONArray("results");
         } catch (JSONException e) {
             Log.d("Places", "parse error");

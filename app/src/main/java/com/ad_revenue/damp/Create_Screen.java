@@ -64,8 +64,7 @@ public class Create_Screen extends AppCompatActivity {
 
             EditText planOther = (EditText) findViewById(R.id.editOther);
             planOther.setText(plan[3]);
-        }
-        else {
+        } else {
             editMode = false;
         }
 
@@ -84,7 +83,7 @@ public class Create_Screen extends AppCompatActivity {
         EditText planOther = (EditText) findViewById(R.id.editOther);
         String other = planOther.getText().toString();
 
-        if(editMode) {
+        if (editMode) {
             myJSON.deletePlan(myContext, getIntent().getStringExtra("patientName"), getIntent().getIntExtra("indexInto", 0));
             myJSON.writeToPlans(myContext, getIntent().getStringExtra("patientName"), name, steps, meds, other);
             /*

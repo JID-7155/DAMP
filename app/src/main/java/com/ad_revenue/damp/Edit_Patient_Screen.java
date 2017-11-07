@@ -8,9 +8,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
 import com.ad_revenue.damp.Services.JSONService;
+
+import java.util.ArrayList;
 
 public class Edit_Patient_Screen extends AppCompatActivity {
     JSONService jsonService;
@@ -35,7 +35,7 @@ public class Edit_Patient_Screen extends AppCompatActivity {
         updateProperties();
 
         if (!jsonService.isPatientInfoPresent(context, getIntent().getStringExtra("patientName"))) {
-            properties = new ArrayList<String>(){{
+            properties = new ArrayList<String>() {{
                 add(0, getIntent().getStringExtra("patientName"));
                 add(1, "");
                 add(2, "");
@@ -72,8 +72,8 @@ public class Edit_Patient_Screen extends AppCompatActivity {
         EditText hospitalNameText = (EditText) hospitalForm.findViewById(R.id.hospitalNameText);
         EditText hospitalAddressText = (EditText) hospitalForm.findViewById(R.id.hospitalAddressText);
 
-        jsonService.writeToPatients(this.context, getIntent().getStringExtra("patientName"),  nameText.getText().toString(), ageText.getText().toString(), miscText.getText().toString()
-        , hospitalNameText.getText().toString(), hospitalAddressText.getText().toString());
+        jsonService.writeToPatients(this.context, getIntent().getStringExtra("patientName"), nameText.getText().toString(), ageText.getText().toString(), miscText.getText().toString()
+                , hospitalNameText.getText().toString(), hospitalAddressText.getText().toString());
         Toast.makeText(context, "Patient Information saved successfully.", Toast.LENGTH_SHORT).show();
         finish();
     }
@@ -87,7 +87,7 @@ public class Edit_Patient_Screen extends AppCompatActivity {
 
     public void updateProperties() {
         if (!jsonService.isPatientInfoPresent(context, getIntent().getStringExtra("patientName"))) {
-            properties = new ArrayList<String>(){{
+            properties = new ArrayList<String>() {{
                 add(0, getIntent().getStringExtra("patientName"));
                 add(1, "");
                 add(2, "");

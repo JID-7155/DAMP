@@ -1,14 +1,10 @@
 package com.ad_revenue.damp;
 
-import android.*;
 import android.app.AlertDialog;
-import android.app.ListActivity;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
-import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
@@ -16,13 +12,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -33,48 +25,41 @@ import android.widget.TextView;
 import com.ad_revenue.damp.Services.JSONService;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.location.LocationServices;
-
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Map_Screen extends AppCompatActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
 
+    public List<HashMap<String, String>> nearbyPlaces;
     Context myContext = this;
     JSONService myJSONService;
     GoogleMap map;
-    MapView mMapView;
-    Geocoder mGeocoder;
-    LocationManager mLocationManager;
-    GoogleApiClient mGoogleApiClient;
-    LocationRequest mLocationRequest;
-    Location mLastLocation;
-    Marker mCurrLocationMarker;
-    Marker mPreferredHospitalMarker;
-    public List<HashMap<String, String>> nearbyPlaces;
-
+    MapView myMapView;
+    Geocoder myGeocoder;
+    LocationManager myLocationManager;
+    GoogleApiClient myGoogleApiClient;
+    LocationRequest myLocationRequest;
+    Location myLastLocation;
+    Marker myCurrLocationMarker;
+    Marker myPreferredHospitalMarker;
     ArrayList<String> patientProperties;
     String patientName;
 
@@ -84,67 +69,52 @@ public class Map_Screen extends AppCompatActivity implements OnMapReadyCallback,
 
     ListView hospitalListView;
 
-    private final int PROXIMITY_RADIUS = 10000;
-
-    private final String HOSPITAL_QUERY = "hospital";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map__screen);
         myJSONService = new JSONService();
-        mGeocoder = new Geocoder(this);
+        myGeocoder = new Geocoder(this);
         setHospitalListView();
 
-
-        mMapView = (MapView) findViewById(R.id.map);
-        mMapView.onCreate(savedInstanceState);
-        mLocationManager = (LocationManager)getApplicationContext().getSystemService(LOCATION_SERVICE);
+        myMapView = (MapView) findViewById(R.id.map);
+        myMapView.onCreate(savedInstanceState);
+        myLocationManager = (LocationManager) getApplicationContext().getSystemService(LOCATION_SERVICE);
 
         if (!CheckGooglePlayServices()) {
-            //Log.d("onCreate", "Finishing test case since Google Play Services are not available");
             finish();
         }
-        else {
-            //Log.d("onCreate","Google Play Services available.");
-        }
 
-        mMapView.getMapAsync(this);
-
-
+        myMapView.getMapAsync(this);
     }
 
     public void setHospitalListView() {
-        hospitalListView = (ListView)this.findViewById(R.id.addressList);
+        hospitalListView = (ListView) this.findViewById(R.id.addressList);
 
-        hospitalListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+        hospitalListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String addressText = nearbyPlaces.get(position).get("vicinity");
-                String name = nearbyPlaces.get(position).get("place_name");
-
-                System.out.println(name);
 
                 try {
-                    List<Address> address = mGeocoder.getFromLocationName(addressText, 1);
+                    List<Address> address = myGeocoder.getFromLocationName(addressText, 1);
                     zoomToLocation(address.get(0).getLatitude(), address.get(0).getLongitude());
-                } catch(IOException e) {
+                } catch (IOException e) {
                     e.printStackTrace();
                     System.out.println("Could not retrieve response from Geocoder.");
                 }
             }
         });
 
-        hospitalListView.setOnItemLongClickListener( new AdapterView.OnItemLongClickListener() {
+        hospitalListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id){
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 String addressText = nearbyPlaces.get(position).get("vicinity");
                 String name = nearbyPlaces.get(position).get("place_name");
-                System.out.println("LONG BOI ACTIVATED");
 
-                if(addressText != null)
-                    saveAddressInformation(name,addressText);
+                if (addressText != null)
+                    saveAddressInformation(name, addressText);
 
                 return true;
             }
@@ -152,8 +122,7 @@ public class Map_Screen extends AppCompatActivity implements OnMapReadyCallback,
     }
 
     public void updatePreferredHospitalInfo() {
-
-        if(patientName != null) {
+        if (patientName != null) {
             patientProperties = myJSONService.getPatientInformation(myContext, patientName);
         } else {
             patientProperties = getIntent().getStringArrayListExtra("patientProperties");
@@ -175,21 +144,19 @@ public class Map_Screen extends AppCompatActivity implements OnMapReadyCallback,
         }
 
         try {
-            List<Address> address = mGeocoder.getFromLocationName(preferredHospitalAddress, 1);
+            List<Address> address = myGeocoder.getFromLocationName(preferredHospitalAddress, 1);
             preferredHospitalLocation = new LatLng(address.get(0).getLatitude(), address.get(0).getLongitude());
-        } catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Could not retrieve response from Geocoder.");
         }
 
-
         if (preferredHospitalLocation != null) {
-
             MarkerOptions markerOptions = new MarkerOptions();
             markerOptions.position(preferredHospitalLocation);
             markerOptions.title(preferredHospitalName);
             markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-            mPreferredHospitalMarker = map.addMarker(markerOptions);
+            myPreferredHospitalMarker = map.addMarker(markerOptions);
         }
     }
 
@@ -204,8 +171,6 @@ public class Map_Screen extends AppCompatActivity implements OnMapReadyCallback,
         }
         ArrayAdapter adapter = new ArrayAdapter<>(this, R.layout.activity_singleplan, addresses);
         hospitalListView.setAdapter(adapter);
-
-
     }
 
     public void saveAddressInformation(String hospitalName, String hospitalAddress) {
@@ -216,13 +181,12 @@ public class Map_Screen extends AppCompatActivity implements OnMapReadyCallback,
         choice.setTitle("Save Hospital Information");
         choice.setMessage("Do you want to make this hospital your preferred hospital?");
 
-
         choice.setButton(AlertDialog.BUTTON_POSITIVE, "Yes",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         myJSONService.writeToPatients(myContext, patientProperties.get(0), patientProperties.get(0), patientProperties.get(1),
-                                patientProperties.get(2),  name, address);
-                        mPreferredHospitalMarker.remove();
+                                patientProperties.get(2), name, address);
+                        myPreferredHospitalMarker.remove();
                         updatePreferredHospitalInfo();
                     }
                 });
@@ -239,21 +203,20 @@ public class Map_Screen extends AppCompatActivity implements OnMapReadyCallback,
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        mMapView.onSaveInstanceState(outState);
+        myMapView.onSaveInstanceState(outState);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        mMapView.onResume();
-
+        myMapView.onResume();
     }
 
     private boolean CheckGooglePlayServices() {
         GoogleApiAvailability googleAPI = GoogleApiAvailability.getInstance();
         int result = googleAPI.isGooglePlayServicesAvailable(this);
-        if(result != ConnectionResult.SUCCESS) {
-            if(googleAPI.isUserResolvableError(result)) {
+        if (result != ConnectionResult.SUCCESS) {
+            if (googleAPI.isUserResolvableError(result)) {
                 googleAPI.getErrorDialog(this, result,
                         0).show();
             }
@@ -267,14 +230,8 @@ public class Map_Screen extends AppCompatActivity implements OnMapReadyCallback,
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
 
-            // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+            if (!ActivityCompat.shouldShowRequestPermissionRationale(this,
                     android.Manifest.permission.ACCESS_FINE_LOCATION)) {
-
-
-            } else {
-
-                // No explanation needed, we can request the permission.
                 ActivityCompat.requestPermissions(this,
                         new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
                         1);
@@ -284,7 +241,7 @@ public class Map_Screen extends AppCompatActivity implements OnMapReadyCallback,
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        if(map == null) {
+        if (map == null) {
             map = googleMap;
         }
 
@@ -298,48 +255,44 @@ public class Map_Screen extends AppCompatActivity implements OnMapReadyCallback,
                 buildGoogleApiClient();
                 map.setMyLocationEnabled(true);
             }
-        }
-        else {
+        } else {
             buildGoogleApiClient();
             map.setMyLocationEnabled(true);
         }
-
         checkPermissions();
-
     }
 
     protected synchronized void buildGoogleApiClient() {
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
+        myGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
                 .build();
-        mGoogleApiClient.connect();
+        myGoogleApiClient.connect();
     }
 
     public void showNearbyHospitals() {
+        final String HOSPITAL_QUERY = "hospital";
+
         map.clear();
         nearbyPlaces = new ArrayList<>();
-        String url = getUrl(mLastLocation.getLatitude(), mLastLocation.getLongitude(), HOSPITAL_QUERY);
+        String url = getUrl(myLastLocation.getLatitude(), myLastLocation.getLongitude(), HOSPITAL_QUERY);
         Object[] DataTransfer = new Object[2];
         DataTransfer[0] = map;
         DataTransfer[1] = url;
         GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData(this);
         try {
             getNearbyPlacesData.execute(DataTransfer).get();
-
-
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("Something realllly bad happened.");
         }
         updatePreferredHospitalInfo();
-
     }
 
     private String getUrl(double latitude, double longitude, String nearbyPlace) {
-
         StringBuilder googlePlacesUrl = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
+        final int PROXIMITY_RADIUS = 10000;
+
         googlePlacesUrl.append("location=" + latitude + "," + longitude);
         googlePlacesUrl.append("&radius=" + PROXIMITY_RADIUS);
         googlePlacesUrl.append("&type=" + nearbyPlace);
@@ -349,13 +302,12 @@ public class Map_Screen extends AppCompatActivity implements OnMapReadyCallback,
     }
 
     public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
+                                           @NonNull String permissions[], @NonNull int[] grantResults) {
         switch (requestCode) {
             case 1: {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                    if (mGoogleApiClient == null) {
+                    if (myGoogleApiClient == null) {
                         buildGoogleApiClient();
                     }
                     try {
@@ -369,55 +321,53 @@ public class Map_Screen extends AppCompatActivity implements OnMapReadyCallback,
         }
     }
 
-
     @Override
     protected void onPause() {
-        mMapView.onPause();
+        myMapView.onPause();
         super.onPause();
     }
 
     @Override
     protected void onDestroy() {
-        mMapView.onDestroy();
+        myMapView.onDestroy();
         super.onDestroy();
     }
 
     @Override
     public void onLowMemory() {
         super.onLowMemory();
-        mMapView.onLowMemory();
+        myMapView.onLowMemory();
     }
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-        mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(1000);
-        mLocationRequest.setFastestInterval(1000);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+        myLocationRequest = new LocationRequest();
+        myLocationRequest.setInterval(1000);
+        myLocationRequest.setFastestInterval(1000);
+        myLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
         if (ContextCompat.checkSelfPermission(this,
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
-            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+            LocationServices.FusedLocationApi.requestLocationUpdates(myGoogleApiClient, myLocationRequest, this);
         }
-
     }
 
     @Override
     public void onConnectionSuspended(int i) {
-
+        //TODO: fail-safe if connection broken.
     }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
+        //TODO: fail-safe if connection fails.
     }
 
     @Override
     public void onLocationChanged(Location location) {
 
-        mLastLocation = location;
-        if (mCurrLocationMarker != null) {
-            mCurrLocationMarker.remove();
+        myLastLocation = location;
+        if (myCurrLocationMarker != null) {
+            myCurrLocationMarker.remove();
         }
 
         //Place current location marker
@@ -426,15 +376,15 @@ public class Map_Screen extends AppCompatActivity implements OnMapReadyCallback,
         markerOptions.position(latLng);
         markerOptions.title("Current Position");
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
-        mCurrLocationMarker = map.addMarker(markerOptions);
+        myCurrLocationMarker = map.addMarker(markerOptions);
 
         //move map camera
         zoomToLocation(latLng.latitude, latLng.longitude);
         showNearbyHospitals();
 
         //stop location updates
-        if (mGoogleApiClient != null) {
-            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+        if (myGoogleApiClient != null) {
+            LocationServices.FusedLocationApi.removeLocationUpdates(myGoogleApiClient, this);
         }
     }
 
@@ -443,12 +393,6 @@ public class Map_Screen extends AppCompatActivity implements OnMapReadyCallback,
         map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         map.animateCamera(CameraUpdateFactory.zoomTo(11));
     }
-
-    public void goToCurrLocation(View view) {
-        zoomToLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude());
-    }
-
-
 
     public void goToPreferredHospital(View view) {
 

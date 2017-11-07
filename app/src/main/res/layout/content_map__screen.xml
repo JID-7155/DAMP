@@ -15,7 +15,7 @@
         android:layout_width="367dp"
         android:layout_height="244dp"
         tools:context="com.example.mapwithmarker.MapsMarkerActivity"
-        tools:layout_editor_absoluteY="259dp"
-        tools:layout_editor_absoluteX="9dp" />
+        tools:layout_editor_absoluteX="9dp"
+        tools:layout_editor_absoluteY="259dp" />
 
 </android.support.constraint.ConstraintLayout>
