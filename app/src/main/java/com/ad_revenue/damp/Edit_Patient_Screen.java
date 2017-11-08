@@ -72,6 +72,7 @@ public class Edit_Patient_Screen extends AppCompatActivity {
         EditText hospitalNameText = (EditText) hospitalForm.findViewById(R.id.hospitalNameText);
         EditText hospitalAddressText = (EditText) hospitalForm.findViewById(R.id.hospitalAddressText);
 
+
         jsonService.writeToPatients(this.context, getIntent().getStringExtra("patientName"), nameText.getText().toString(), ageText.getText().toString(), miscText.getText().toString()
                 , hospitalNameText.getText().toString(), hospitalAddressText.getText().toString());
         Toast.makeText(context, "Patient Information saved successfully.", Toast.LENGTH_SHORT).show();
@@ -94,6 +95,8 @@ public class Edit_Patient_Screen extends AppCompatActivity {
                 add(3, "");
                 add(4, "");
             }};
+            jsonService.writeToPatients(getApplicationContext(), properties.get(0),
+                    properties.get(0),properties.get(1),properties.get(2),properties.get(3),properties.get(4));
         } else {
             properties = jsonService.getPatientInformation(context, getIntent().getStringExtra("patientName"));
         }
