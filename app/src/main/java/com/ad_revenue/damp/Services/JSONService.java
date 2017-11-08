@@ -70,9 +70,9 @@ public class JSONService {
 
     public String[] getPatientNames(Context context) {
         File patientHome = new File(getPatientsDir(context));
-        if(!patientHome.exists()) {
+        if (!patientHome.exists()) {
             patientHome.mkdir();
-        } else if(patientHome.length() < 1) {
+        } else if (patientHome.length() < 1) {
             String[] emptyList = new String[1];
             emptyList[0] = ("Add New Patient");
             return emptyList;
@@ -80,8 +80,7 @@ public class JSONService {
 
         ArrayList<String> toReturn = new ArrayList<>();
         toReturn.add("Add New Patient");
-        for(File file : (new File(getPatientsDir(context)).listFiles()))
-        {
+        for (File file : (new File(getPatientsDir(context)).listFiles())) {
             toReturn.add(file.getName());
         }
         return toReturn.toArray(new String[toReturn.size()]);
@@ -96,6 +95,11 @@ public class JSONService {
             patientInfo.add((String) currentJson.get("Name"));
             patientInfo.add((String) currentJson.get("Age"));
             patientInfo.add((String) currentJson.get("Other Info"));
+
+            JSONObject hospitalObject = (JSONObject) currentJson.get("Preferred Hospital");
+            patientInfo.add((String) hospitalObject.get("Hospital Name"));
+            patientInfo.add((String) hospitalObject.get("Address"));
+
             readMe.close();
             return patientInfo;
         } catch (IOException e) {
@@ -146,12 +150,19 @@ public class JSONService {
     }
 
     @SuppressWarnings("unchecked")
-    public void writeToPatients(Context context, String patientName, String newName, String newAge, String newOtherInfo) {
+    public void writeToPatients(Context context, String patientName, String newName, String newAge, String newOtherInfo,
+                                String hospitalName, String hospitalAddress) {
         try {
+            JSONObject hospitalObject = new JSONObject();
+            hospitalObject.put("Hospital Name", hospitalName);
+            hospitalObject.put("Address", hospitalAddress);
+
             JSONObject section = new JSONObject();
+            section.put("Preferred Hospital", hospitalObject);
             section.put("Other Info", newOtherInfo);
             section.put("Age", newAge);
             section.put("Name", newName);
+
 
             String fullFilePath = getPatientInfo(context, patientName);
 

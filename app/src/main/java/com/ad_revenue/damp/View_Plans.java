@@ -30,9 +30,11 @@ public class View_Plans extends ListActivity {
         patientName = getIntent().getStringExtra("patientName");
         boolean isNew = getIntent().getBooleanExtra("isNew", false);
 
-        if(isNew) {
+        if (isNew) {
             myJSON.createPatient(myContext, patientName);
         }
+        setupExamplePlans(this, myJSON);
+
 
         String[] plans = myJSON.getInternalPlanProperties(myContext, patientName, "Name");
 
@@ -138,6 +140,11 @@ public class View_Plans extends ListActivity {
         ArrayAdapter adapter = new ArrayAdapter<>(this, R.layout.activity_singleplan, plans);
         ListView listView = this.getListView();
         listView.setAdapter(adapter);
+    }
+
+    public void goToMap(View view) {
+        Intent intent = new Intent(myContext, Map_Screen.class);
+        startActivity(intent);
     }
 
     private enum ListMode {EDIT, DELETE}

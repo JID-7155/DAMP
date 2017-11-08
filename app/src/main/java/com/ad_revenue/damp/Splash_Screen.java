@@ -30,7 +30,8 @@ public class Splash_Screen extends AppCompatActivity {
         setContentView(R.layout.activity_splash__screen);
 
         myContext = getApplicationContext();
-        patientNames = new JSONService(){}.getPatientNames(myContext);
+        patientNames = new JSONService() {
+        }.getPatientNames(myContext);
 
         Spinner spinner = (Spinner) findViewById(R.id.patientOptions);
         namesAdapter = new ArrayAdapter<>(this,
@@ -42,8 +43,9 @@ public class Splash_Screen extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapter, View v, int position, long id) {
                 nameToPass = adapter.getItemAtPosition(position).toString();
-        }
-        @Override
+            }
+
+            @Override
             public void onNothingSelected(AdapterView<?> adapter) {
                 nameToPass = "New Patient";
             }
@@ -54,12 +56,12 @@ public class Splash_Screen extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        patientNames = new JSONService(){}.getPatientNames(myContext);
+        patientNames = new JSONService() {
+        }.getPatientNames(myContext);
 
         setContentView(R.layout.activity_splash__screen);
 
         myContext = getApplicationContext();
-        patientNames = new JSONService(){}.getPatientNames(myContext);
 
         Spinner spinner = (Spinner) findViewById(R.id.patientOptions);
         namesAdapter = new ArrayAdapter<>(this,
@@ -72,6 +74,7 @@ public class Splash_Screen extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapter, View v, int position, long id) {
                 nameToPass = adapter.getItemAtPosition(position).toString();
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> adapter) {
                 nameToPass = "New Patient";
@@ -81,7 +84,7 @@ public class Splash_Screen extends AppCompatActivity {
     }
 
     public void editPlans(View view) {
-        if(!nameToPass.equals("Add New Patient")) {
+        if (!nameToPass.equals("Add New Patient")) {
             Intent intent = new Intent(this, View_Plans.class);
             intent.putExtra("patientName", nameToPass);
             intent.putExtra("isNew", false);
@@ -115,7 +118,7 @@ public class Splash_Screen extends AppCompatActivity {
                         }
                     });
             builder.show();
-            if(!nameToPass.equals("Add New Patient")) {
+            if (!nameToPass.equals("Add New Patient")) {
                 Intent intent = new Intent(this, View_Plans.class);
                 intent.putExtra("patientName", nameToPass);
                 startActivity(intent);

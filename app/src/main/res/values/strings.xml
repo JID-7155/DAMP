@@ -6,4 +6,6 @@
     <string name="title_activity_template__screen">Template_Screen</string>
     <string name="submit">Create New Patient</string>
     <string name="cancel">Cancel</string>
+    <string name="title_activity_map__screen">Map_Screen</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
