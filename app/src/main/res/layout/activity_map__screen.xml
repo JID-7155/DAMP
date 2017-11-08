@@ -45,14 +45,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:text="[No Preferred Hospital Name]" />
 
         <TextView
             android:id="@+id/preferredHospitalAddressText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:text="[No Preferred Hospital Address]" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -140,7 +140,10 @@ public class Map_Screen extends AppCompatActivity implements OnMapReadyCallback,
 
         try {
             List<Address> address = myGeocoder.getFromLocationName(preferredHospitalAddress, 1);
-            preferredHospitalLocation = new LatLng(address.get(0).getLatitude(), address.get(0).getLongitude());
+
+            if(address.size() > 0) {
+                preferredHospitalLocation = new LatLng(address.get(0).getLatitude(), address.get(0).getLongitude());
+            }
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Could not retrieve response from Geocoder.");
