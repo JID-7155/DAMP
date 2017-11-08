@@ -55,10 +55,8 @@ public class GetNearbyPlacesData extends AsyncTask<Object, String, String> {
     }
 
     private void ShowNearbyPlaces(List<HashMap<String, String>> nearbyPlacesList) {
-        //currNearbyPlaces = nearbyPlacesList;
 
         for (int i = 0; i < nearbyPlacesList.size(); i++) {
-            //mActivity.nearbyPlaces.add(nearbyPlacesList.get(i));
             Log.d("onPostExecute", "Entered into showing locations");
             MarkerOptions markerOptions = new MarkerOptions();
             HashMap<String, String> googlePlace = nearbyPlacesList.get(i);

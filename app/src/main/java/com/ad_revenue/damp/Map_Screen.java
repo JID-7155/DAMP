@@ -94,15 +94,10 @@ public class Map_Screen extends AppCompatActivity implements OnMapReadyCallback,
         hospitalListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String addressText = nearbyPlaces.get(position).get("vicinity");
+                double addressLat = Double.parseDouble(nearbyPlaces.get(position).get("lat"));
+                double addressLon = Double.parseDouble(nearbyPlaces.get(position).get("lng"));
+                zoomToLocation(addressLat, addressLon);
 
-                try {
-                    List<Address> address = myGeocoder.getFromLocationName(addressText, 1);
-                    zoomToLocation(address.get(0).getLatitude(), address.get(0).getLongitude());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    System.out.println("Could not retrieve response from Geocoder.");
-                }
             }
         });
 
