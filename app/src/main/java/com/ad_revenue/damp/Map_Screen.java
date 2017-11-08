@@ -184,7 +184,9 @@ public class Map_Screen extends AppCompatActivity implements OnMapReadyCallback,
                     public void onClick(DialogInterface dialog, int id) {
                         myJSONService.writeToPatients(myContext, patientProperties.get(0), patientProperties.get(0), patientProperties.get(1),
                                 patientProperties.get(2), name, address);
-                        myPreferredHospitalMarker.remove();
+                        if(myPreferredHospitalMarker != null) {
+                            myPreferredHospitalMarker.remove();
+                        }
                         updatePreferredHospitalInfo();
                     }
                 });
