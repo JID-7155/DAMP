@@ -1,6 +1,7 @@
 package com.ad_revenue.damp.Services;
 
 import android.content.Context;
+import android.os.Environment;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -147,6 +148,31 @@ public class JSONService {
             e.printStackTrace();
             System.out.println("Error reading file.");
         }
+    }
+
+    public boolean sharePlan(Context context, String patientName, int planNumber) {
+        try {
+            FileReader readMe = new FileReader(getPatientPlans(context, patientName));
+            JSONArray currentJSON = (JSONArray) parser.parse(readMe);
+            String downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + File.separator + patientName + planNumber;
+            System.out.println("=======================");
+            System.out.println(downloadsDir);
+            System.out.println("=======================");
+            FileWriter writeToMe = new FileWriter(downloadsDir, false);
+            String writeMe = currentJSON.get(planNumber).toString();
+            writeToMe.write(writeMe);
+
+            writeToMe.close();
+            readMe.close();
+
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+            System.out.println("Parse error.");
+        }
+        return false;
     }
 
     @SuppressWarnings("unchecked")

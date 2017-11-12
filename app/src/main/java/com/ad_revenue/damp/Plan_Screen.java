@@ -11,12 +11,17 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ad_revenue.damp.Services.JSONService;
 
 public class Plan_Screen extends AppCompatActivity {
 
     private boolean edited;
+    private Context myContext;
+    private String patientName;
+    private int planNumber;
+    private JSONService myJSON;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,12 +29,12 @@ public class Plan_Screen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plan__screen);
 
-        Context myContext = getApplicationContext();
-        JSONService myJSON = new JSONService();
-        String patientName = getIntent().getStringExtra("patientName");
+        myContext = getApplicationContext();
+        myJSON = new JSONService();
+        patientName = getIntent().getStringExtra("patientName");
 
         String[] steps = myJSON.getInternalPlanProperties(myContext, patientName, "Steps");
-        int planNumber = getIntent().getIntExtra("indexInto", 0);
+        planNumber = getIntent().getIntExtra("indexInto", 0);
         String[] stringSteps = steps[planNumber].split("\\\\r?\\\\n");
 
         CustomAdapter adapter = new CustomAdapter(this, stringSteps);
@@ -47,6 +52,13 @@ public class Plan_Screen extends AppCompatActivity {
         intent.putExtra("patientName", getIntent().getStringExtra("patientName"));
         intent.putExtra("edit", true);
         startActivity(intent);
+    }
+
+    public void exportCurrentPlan(View view) {
+        if(myJSON.sharePlan(myContext, patientName, planNumber)) {
+            Toast.makeText(myContext, "Plan successfully exported.", Toast.LENGTH_SHORT).show();
+        }
+        Toast.makeText(myContext, "Plan export failed.", Toast.LENGTH_SHORT).show();
     }
 
     @Override
