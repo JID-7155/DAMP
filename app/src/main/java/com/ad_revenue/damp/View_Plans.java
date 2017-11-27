@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -24,7 +25,7 @@ public class View_Plans extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        currentMode = ListMode.EDIT;
+        setCurrentMode(ListMode.EDIT);
         myContext = getApplicationContext();
         myJSON = new JSONService();
         patientName = getIntent().getStringExtra("patientName");
@@ -76,16 +77,55 @@ public class View_Plans extends ListActivity {
         if (currentMode != ListMode.DELETE) {
             currentMode = ListMode.DELETE;
             Toast.makeText(myContext, "Delete Mode", Toast.LENGTH_SHORT).show();
+            hideDelBut();
         } else {
             currentMode = ListMode.EDIT;
             Toast.makeText(myContext, "Edit/View Mode", Toast.LENGTH_SHORT).show();
+            hideEdiBut();
         }
     }
+
+    public void switchMode() {
+        if (currentMode != ListMode.DELETE) {
+            currentMode = ListMode.DELETE;
+            Toast.makeText(myContext, "Delete Mode", Toast.LENGTH_SHORT).show();
+            hideDelBut();
+        } else {
+            currentMode = ListMode.EDIT;
+            Toast.makeText(myContext, "Edit/View Mode", Toast.LENGTH_SHORT).show();
+            hideEdiBut();
+        }
+    }
+
+    private void hideDelBut(){
+        FloatingActionButton delBut = (FloatingActionButton) findViewById(R.id.deleteButton);
+        FloatingActionButton ediBut = (FloatingActionButton) findViewById(R.id.editButton);
+        delBut.setVisibility(View.GONE);
+        ediBut.setVisibility(View.VISIBLE);
+    }
+
+    private void hideEdiBut(){
+        FloatingActionButton delBut = (FloatingActionButton) findViewById(R.id.deleteButton);
+        FloatingActionButton ediBut = (FloatingActionButton) findViewById(R.id.editButton);
+        delBut.setVisibility(View.VISIBLE);
+        ediBut.setVisibility(View.GONE);
+    }
+
+    public void setCurrentMode(ListMode toSet) {
+        if (currentMode == null) {
+            currentMode = toSet;
+        } else if (currentMode != toSet) {
+            switchMode();
+        }
+    }
+
+
 
     public void deletePlan(int position) {
         myJSON.deletePlan(myContext, patientName, position);
         Toast.makeText(myContext, "Plan deleted.", Toast.LENGTH_SHORT).show();
-        onResume();
+        loadPlans();
+        hideDelBut();
     }
 
     public void addPlan(View view) {
@@ -133,7 +173,11 @@ public class View_Plans extends ListActivity {
     @Override
     public void onResume() {
         super.onResume();
+        setCurrentMode(ListMode.EDIT);
+        loadPlans();
+    }
 
+    private void loadPlans(){
         String[] plans = myJSON.getInternalPlanProperties(myContext, patientName, "Name");
 
         setContentView(R.layout.activity_view__plans);
