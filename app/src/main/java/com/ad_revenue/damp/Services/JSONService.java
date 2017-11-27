@@ -154,7 +154,7 @@ public class JSONService {
         try {
             FileReader readMe = new FileReader(getPatientPlans(context, patientName));
             JSONArray currentJSON = (JSONArray) parser.parse(readMe);
-            String downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + File.separator + patientName + planNumber;
+            String downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + File.separator + patientName + planNumber + ".json";
             System.out.println("=======================");
             System.out.println(downloadsDir);
             System.out.println("=======================");

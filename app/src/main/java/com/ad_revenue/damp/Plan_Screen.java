@@ -1,9 +1,11 @@
 package com.ad_revenue.damp;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,6 +57,9 @@ public class Plan_Screen extends AppCompatActivity {
     }
 
     public void exportCurrentPlan(View view) {
+
+        ActivityCompat.requestPermissions((Activity)myContext, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, RESULT_OK);
+
         if(myJSON.sharePlan(myContext, patientName, planNumber)) {
             Toast.makeText(myContext, "Plan successfully exported.", Toast.LENGTH_SHORT).show();
         }
