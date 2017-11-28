@@ -29,7 +29,7 @@
         android:layout_marginStart="14dp"
         android:layout_marginTop="500dp"
         android:onClick="submitInformation"
-        android:text="Create Plan"
+        android:text="@string/create_plan"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -38,10 +38,14 @@
         tools:layout_constraintTop_creator="1" />
 
     <ScrollView
-        android:layout_width="373dp"
-        android:layout_height="491dp"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp">
+        android:layout_width="363dp"
+        android:layout_height="484dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/include4"
+        app:layout_constraintEnd_toStartOf="@+id/include4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/include4"
+        app:layout_constraintTop_toBottomOf="@+id/include4">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -52,11 +56,11 @@
                 android:id="@+id/editPlanName"
                 android:layout_width="match_parent"
                 android:layout_height="76dp"
-                android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
                 android:ems="10"
                 android:hint="@string/plan_name"
                 android:inputType="textPersonName"
+                android:singleLine="true"
                 android:textSize="30sp"
                 app:layout_constraintLeft_toLeftOf="@+id/include4"
                 app:layout_constraintTop_toTopOf="@+id/include4"
@@ -66,9 +70,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="42dp"
-                android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
-                android:text="Steps To Take"
+                android:text="@string/steps_to_take"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editPlanName"
@@ -78,10 +81,13 @@
             <EditText
                 android:id="@+id/editSteps"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
                 android:ems="10"
-                android:hint="What steps should be taken?"
+                android:hint="@string/separate_each_step_with_a_new_line"
                 android:inputType="textMultiLine"
+                android:paddingTop="20dp"
+                android:singleLine="false"
                 android:textAlignment="textStart"
                 android:textSize="14sp"
                 tools:layout_editor_absoluteX="8dp"
@@ -90,9 +96,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="42dp"
-                android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
-                android:text="Medicines"
+                android:text="@string/medicines"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editPlanName"
@@ -101,11 +106,13 @@
 
             <EditText
                 android:id="@+id/editMeds"
-                android:layout_width="378dp"
-                android:layout_height="127dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
                 android:ems="10"
-                android:hint="Which medicines should be taken?"
+                android:hint="@string/which_medicines_should_be_taken"
                 android:inputType="textMultiLine"
+                android:paddingTop="20dp"
                 android:textAlignment="textStart"
                 android:textSize="14sp"
                 tools:layout_editor_absoluteX="8dp"
@@ -114,9 +121,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="42dp"
-                android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
-                android:text="Other"
+                android:text="@string/other"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editPlanName"
@@ -126,18 +132,17 @@
             <EditText
                 android:id="@+id/editOther"
                 android:layout_width="match_parent"
-                android:layout_height="167dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
                 android:ems="10"
-                android:hint="Anything else that should be known?"
+                android:hint="@string/anything_else_that_should_be_known"
                 android:inputType="textMultiLine"
+                android:paddingTop="20dp"
+                android:singleLine="false"
                 android:textAlignment="textStart"
                 android:textSize="14sp"
                 tools:layout_editor_absoluteX="8dp"
                 tools:layout_editor_absoluteY="118dp" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="140dp" />
 
         </LinearLayout>
     </ScrollView>

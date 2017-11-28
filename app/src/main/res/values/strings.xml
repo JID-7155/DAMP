@@ -8,4 +8,11 @@
     <string name="cancel">Cancel</string>
     <string name="title_activity_map__screen">Map_Screen</string>
     <string name="title_activity_maps">Map</string>
+    <string name="steps_to_take">Steps To Take</string>
+    <string name="separate_each_step_with_a_new_line">Separate each step with a new line.</string>
+    <string name="which_medicines_should_be_taken">Which medicines should be taken?</string>
+    <string name="anything_else_that_should_be_known">Anything else that should be known?</string>
+    <string name="create_plan">Create Plan</string>
+    <string name="medicines">Medicines</string>
+    <string name="other">Other</string>
 </resources>

@@ -289,6 +289,9 @@ public class JSONService {
         try {
             JSONArray myJson;
             FileReader file = new FileReader(getPatientPlans(context, patientName));
+            if(!isPlansPresent(context, patientName)) {
+                return new String[]{"No plans created."};
+            }
             myJson = (JSONArray) parser.parse(file);
             String[] toReturn = new String[myJson.size()];
             Iterator jsonIterator = myJson.iterator();
