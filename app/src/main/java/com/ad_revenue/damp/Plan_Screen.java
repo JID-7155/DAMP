@@ -30,8 +30,8 @@ public class Plan_Screen extends AppCompatActivity {
 
         String[] steps = myJSON.getInternalPlanProperties(myContext, patientName, "Steps");
         int planNumber = getIntent().getIntExtra("indexInto", 0);
-        String[] stringSteps = steps[planNumber].split("\\\\r?\\\\n");
-
+//        String[] stringSteps = steps[planNumber].split("\r\n\n|\r\r|\n\n");
+        String[] stringSteps = steps[planNumber].replace("\n\n", "\n").split("\r\n|\r|\n");
         CustomAdapter adapter = new CustomAdapter(this, stringSteps);
         ListView listView = (ListView) findViewById(R.id.stepList);
         listView.setAdapter(adapter);

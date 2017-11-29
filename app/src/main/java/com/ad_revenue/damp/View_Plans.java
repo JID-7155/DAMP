@@ -34,8 +34,6 @@ public class View_Plans extends ListActivity {
         if (isNew) {
             myJSON.createPatient(myContext, patientName);
         }
-        setupExamplePlans(this, myJSON);
-
 
         String[] plans = myJSON.getInternalPlanProperties(myContext, patientName, "Name");
 
@@ -47,7 +45,6 @@ public class View_Plans extends ListActivity {
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
-        // TODO Auto-generated method stub
         super.onListItemClick(l, v, position, id);
 
         switch (currentMode) {
