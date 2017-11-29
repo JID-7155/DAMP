@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--  res/drawable/colored_rect_textview.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:shape="rectangle" android:padding="10dp"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+    <solid
+        android:color="@color/colorPrimaryDark"
+        tools:color="@color/colorPrimaryDark" />
+    <corners
+        android:bottomRightRadius="1dp"
+        android:bottomLeftRadius="1dp"
+        android:topLeftRadius="1dp"
+        android:topRightRadius="1dp"/>
+</shape>

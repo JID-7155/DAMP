@@ -9,36 +9,38 @@
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/map"
-        android:layout_width="299dp"
-        android:layout_height="173dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="43dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="43dp"
+        android:layout_width="match_parent"
+        android:layout_height="168dp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        tools:layout_editor_absoluteX="0dp" />
 
     <ListView
         android:id="@+id/addressList"
-        android:layout_width="254dp"
+        android:layout_width="297dp"
         android:layout_height="252dp"
-        android:layout_marginTop="102dp"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="65dp" />
+        android:layout_marginEnd="43dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="144dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/preferredHospitalClickable"
-        android:layout_width="254dp"
+        android:layout_width="297dp"
         android:layout_height="79dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:clickable="true"
         android:onClick="goToPreferredHospital"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="65dp"
-        tools:layout_editor_absoluteY="16dp">
+        app:layout_constraintBottom_toTopOf="@+id/addressList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:id="@+id/preferredHospitalNameText"
@@ -54,5 +56,26 @@
             android:layout_weight="1"
             android:text="[No Preferred Hospital Address]" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/nearbyHospitals"
+        android:layout_width="match_parent"
+        android:layout_height="31dp"
+        android:background="@drawable/colored_rect_textview"
+        android:text="Nearby Hospitals:"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/addressList"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/preferredHospitalLabel"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_weight="1"
+        android:background="@drawable/colored_rect_textview"
+        android:text="Preferred Hospital:"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/preferredHospitalClickable"
+        tools:layout_editor_absoluteX="0dp" />
 
 </android.support.constraint.ConstraintLayout>
