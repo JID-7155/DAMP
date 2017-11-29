@@ -1,13 +1,13 @@
-[
+﻿[
   {
     "Name": "Stroke",
-    "Steps": "1. Check for signs of stroke. Does the face droop when you try to smile? Does an arm drop when you try to raise both hands? Is the speech slurred? \n\n2. If any of the above questions are 'yes', call 911 immediately and let them know what time the stroke began.",
+    "Steps": "1. Check for signs of stroke. Does the face droop when you try to smile? Does an arm drop when you try to raise both hands? Is the speech slurred? \n\n2. If any of the above questions are 'yes' -- call 911 immediately and let them know what time the stroke began.",
     "Medications": "",
     "Other Notes": "Time is of the essence. Calling a doctor or driving to the hospital yourself may waste precious time. Ambulance workers can judge the situation faster and get you the treatment you need."
   },
   {
     "Name": "Asthma",
-    "Steps": "1. Keep Calm\n\n2. Help the victim sit up in order to have less obstructed airways\n\n3. Eliminate the trigger - There several triggers that could be potentially causing the asthma attack (pollen, dust mites, mold, feathers, etc). If you don't know what it could be, ask the victim directly if possible. If you do know, remove the person from the effects of the trigger as soon as possible.\n\n4. Use any emergency medicines the person may have on them. Be sure to read their labels and follow directions. Ask the person about their action plans.\n\n5. If the situation does not improve or worsens, call 911.",
+    "Steps": "1. Keep calm.\n\n2. Help the victim sit up in order to have less obstructed airways.\n\n3. Eliminate the trigger - There several triggers that could be potentially causing the asthma attack (pollen, dust mites, mold, feathers, etc). If you don't know what it could be, ask the victim directly if possible. If you do know, remove the person from the effects of the trigger as soon as possible.\n\n4. Use any emergency medicines the person may have on them. Be sure to read their labels and follow directions. Ask the person about their action plans.\n\n5. If the situation does not improve or worsens, call 911.",
     "Medications": "Rescue Inhaler",
     "Other Notes": "Sources: \nhttps://www.everydayhealth.com/asthma/how-to-help-someone-having-an-asthma-attack.aspx\nhttps://tribune.com.pk/story/890516/5-steps-to-survive-an-asthma-attack-without-an-inhaler/"
   },
@@ -15,12 +15,108 @@
     "Name": "Appendicitis",
     "Steps": "1. As soon as the condition is discovered, get medical attention immediately.\n\n2. Do not eat, drink, or use any pain remedies, antacids, laxatives, or heating pads, which can cause an inflamed appendix to rupture.",
     "Medications": "",
-    "Other Notes": "Source:\nhttp://www.webmd.com/digestive-disorders/digestive-diseases-appendicitis#1"
+    "Other Notes": "Sources:\nhttp://www.webmd.com/digestive-disorders/digestive-diseases-appendicitis#1"
   },
   {
     "Name": "Seizure",
-    "Steps": "During:\n1. If a person around is having a seizure, protect them from injury. Keep them from falling or try to guide them gently to the floor. \n\n2. If the person is on the ground, try to position the person on their side so that fluid can leak out of the mouth.\n\n3. Do not force anything into the person's mouth.\n\n4. Do not try to hold down the person\n\n5. If the person is pregnant or the seizure lasts for more than 5 minutes, call medical services immediately\n\nAfter:\n1. Check for injuries.\n\n2. If the person could not be moved to their side, move them at this point.\n\n3. Make sure the person is in a place to rest.\n\n4. Do not offer food or drink until the person is fully awake and alert.",
+    "Steps": "During:\n\n1. If a person around is having a seizure, protect them from injury. Keep them from falling or try to guide them gently to the floor. \n\n2. If the person is on the ground, try to position the person on their side so that fluid can leak out of the mouth.\n\n3. Do not force anything into the person's mouth.\n\n4. Do not try to hold down the person.\n\n5. If the person is pregnant or the seizure lasts for more than 5 minutes, call medical services immediately.\n\nAfter:\n\n1. Check for injuries.\n\n2. If the person could not be moved to their side, move them at this point.\n\n3. Make sure the person is in a place to rest.\n\n4. Do not offer food or drink until the person is fully awake and alert.",
     "Medications": "",
-    "Other Notes": "Source: http://www.webmd.com/epilepsy/tc/helping-a-person-during-an-epileptic-seizure-topic-overview"
+    "Other Notes": "Sources: http://www.webmd.com/epilepsy/tc/helping-a-person-during-an-epileptic-seizure-topic-overview"
+  },
+  {
+    "Name": "Broken Leg",
+    "Steps": "1. You want to avoid swelling and any further injury. The best way to do this is to keep the injured leg as still as possible, with as little weight on it. Apply ice on the injury and keep the leg raised.\n\n2. Seek Medical Care Immediately",
+    "Medications": "N/A",
+    "Other Notes": "Sources: http://www.webmd.com/first-aid/broken-leg-treatment"
+  },
+  {
+    "Name": "Dislocated Joint",
+    "Steps": "0. Do NOT attempt to force back into place. Doing so without proper training may result in nerve, ligament, joint, or surrounding blood vessel damage.\n\n1. Ensure affected individual still has sensitivity in surrounding areas by gently pressing nearby pulse points.\n\n2. Instruct affected to prevent further usage of joint and associated body parts. Over the counter pain relief medication, such as ibuprofen, may help the individual in coping with possible pain.\n\n3. If available, apply ice to dislocated joint to reduce swelling and fluid build-up.\n\n4. If available, compress afflicted joint gently with a clean wrapping.\n\n5. While continuing to ice, compress, and limit the afflicted joint, get the individual to a trained medical professional so that x-rays and appropriate procedures can take place.",
+    "Medications": "Ibuprofen, Aspirin, Acetaminophen, Naproxen, general pain relief medications.",
+    "Other Notes": "Sources:\nhttps://www.healthline.com/health/dislocation\nhttp://www.emedicinehealth.com/elbow_dislocation/page2_em.htm#self-care_at_home_for_elbow_dislocation\nhttp://www.mayoclinic.org/first-aid/first-aid-dislocation/basics/art-20056693\nhttps://patient.info/health/common-dislocations"
+  },
+  {
+    "Name": "Panic Attack",
+    "Steps": "1. Remove individual from possible triggers and disruptive stimuli.\n\n2. Instruct panicked individual to breath deeply, allow individual moments of silence to assess situation.\n\n3. If available, take prescribed medication.\n\n4. Attempt to help individual \"ground\" themselves by asking them simple questions. (Ex. Where are you? What is today? What is your favorite food?)",
+    "Medications": "Antidepressants, Benzodiazepines, various beta blockers, ONLY if prescribed.",
+    "Other Notes": "It is critical that the individual is removed from the triggering factors, or vice versa, if unable to determine root issue, ask individual to walk through their thoughts before the attack."
+  },
+  {
+    "Name": "Low Blood Sugar (Hypoglycemia)",
+    "Steps": "1. Eat or drink at least 15 grams of fast-acting carbohydrates such as candy, juice, glucose tablets/gel, soda, milk.\n\n2. Wait 15 minutes and check blood sugar again.  If your blood sugar is still less than 70 mg/dL, consume another serving of foods similar to above.\n\n3. If individual passes out, a glucagon injection is necessary. ",
+    "Medications": "Glucagon injection, small servings of fast-acting carbs (hard-candies).",
+    "Other Notes": "Sources:\nhttps://www.webmd.com/diabetes/guide/diabetes-hypoglycemia#3\nhttps://www.niddk.nih.gov/health-information/diabetes/overview/preventing-problems/low-blood-glucose-hypoglycemia"
+  },
+  {
+    "Name": "Minor Cut/Scrape",
+    "Steps": "0. Ensure hands are clean by washing with soap.\n\n1. Stop the bleeding by applying firm, direct pressure with a clean cloth or gauze, if available.\n\n2. Wash wound with clean water and lightly scrub away dirt, blood, or materials with a clean cloth. \n\n3. Apply an antibiotic ointment to further clean wound and prevent scarring or infection.\n\n4. Cover wound with bandage or gauze and ensure it is held in place.",
+    "Medications": "If in pain, pain relief such as ibuprofen or acetaminophen is acceptable.",
+    "Other Notes": "If bleeding persists, or if the afflicted has not had a tetanus shot in the last five years, it is recommended to go to a hospital as soon as possible."
+  },
+  {
+    "Name": "Alcohol Poisoning",
+    "Steps": "1. Do your best to keep them awake and sitting up.\n\n2. If possible, have them drink water.\n\n3. If they're passed out, lie them on their side in the recovery position. Check that they're breathing properly.\n\n4. Keep them warm.\n\n5. Monitor their condition and call 911 if they do not improve.",
+    "Medications": "",
+    "Other Notes": "Do not give them anything that could dehydrate them, such as coffee.\n\nDo not make them vomit.\n\nDo not let them take a cold shower.\n\nDo not let them drink any more alcohol."
+  },
+  {
+    "Name": "Major Cut/Laceration",
+    "Steps": "0. Call 911 or an ambulance as soon as possible.\n\n1. Apply firm, direct pressure to site of wound to help stop bleeding. Do NOT attempt to clean or disinfect.\n\n2. Wrap wound in gauze and keep applying pressure until emergency services arrive.",
+    "Medications": "N/A",
+    "Other Notes": "Sources:\nhttps://www.webmd.com/first-aid/cuts-or-lacerations-treatment\nhttps://medlineplus.gov/ency/article/000043.htm"
+  },
+  {
+    "Name": "Snake Bite",
+    "Steps": "1. Make quick note of the suspect snake's appearance and call 911.\n\n\n2. Remain calm and move outside of striking distance of snake.\n\n\n3. Remove any jewelry and/or tight clothing before the bite starts to swell.\n\n\n4. Position body so that the wound is below the level of the hear.\n\n\n5. Allow the bite to bleed freely for 15 - 30 seconds before cleansing.\n\n\n6. Cleanse lightly with water, then cover the wound with a clean, dry blessing.\n\n\n7.  If possible, try restricting movement of the area with a light splint.\n\n\n8. Monitor vital signs such as breathing, temperature, pulse, and blood pressure. This information along with any details about the snake can be useful to 911 operators and EMTs.",
+    "Medications": "",
+    "Other Notes": "Do Not:\n1. Use a tourniquet or apply ice.\n2. Cut the wound, or attempt to remove the venom.\n3. Drink any caffeine or alochol.\n4. Try to capture the snake."
+  },
+  {
+    "Name": "Minor Burn",
+    "Steps": "1. Smother flames, burning material, or source of burn.\n\n2. Remove any clothing or jewelry constricting burn site.\n\n3. Hold burned site under cool (not cold) running water until pain subsides. (10+ minutes recommended)\n\n4. Cover with bandage or gauze.",
+    "Medications": "Over-the-counter pain relief.",
+    "Other Notes": "Sources:\nhttps://www.webmd.com/first-aid/tc/burns-home-treatment#1\nhttps://www.webmd.com/first-aid/thermal-heat-or-fire-burns-treatment#1"
+  },
+  {
+    "Name": "Drowning",
+    "Steps": "1. If there is a lifeguard nearby, notify them. Otherwise, call 911.\n\n\n2. Take person out of water and lay them on their back.\n\n\n3. Check for breathing by placing your ear to the person's mouth and nose, make note of any air coming and check if their chest is moving.\n\n\n4. If there are no signs of breathing, check their pulse for 10 seconds.\n\n\n5. If there is no pulse, begin Mouth-to-mouth resuscitation.\n\n\n6. Turn the drowning person's head to the side, allowing any water to drain from his or her mouth and nose. Turn the head back to the center.\n\n\n7. Begin mouth-to-mouth resuscitation on land, if possible, or in the water if the injured person needs immediate life-and-death measures.\n\n\n8. Strongly breathe four times into the mouth of the injured person as you pinch his or her nose. This helps air get past any water that is clogging the breathing passageways and the lungs.\n\n\n9. After four strong breaths, put your ear near the mouth and watch the chest for any breathing movement.\n\n\n10. Check the pulse for signs of life.\n\n\n11. Repeat the cycle.",
+    "Medications": "",
+    "Other Notes": ""
+  },
+  {
+    "Name": "Major Burn (2nd or 3rd degree)",
+    "Steps": "0. Call 911 immediately.\n\n1. Lay burned individual flat.\n\n2. Cover burn site(s) in a large enough clean sheet.\n\n3. Attempt to calm individual while waiting for medical services.",
+    "Medications": "N/A",
+    "Other Notes": "Do NOT attempt to wash burn sites with water.\nDo NOT attempt to clean burns."
+  },
+  {
+    "Name": "Concussion",
+    "Steps": "1. Avoid triggering any symptoms.\n\n2. Get as much rest as possible.\n\n3. Avoid any strenuous activity.",
+    "Medications": "",
+    "Other Notes": "Take precaution when using pain relievers or anti-inflammatory medication, as they could increase your chances of bleeding."
+  },
+  {
+    "Name": "Chemical Burn",
+    "Steps": "1. Remove cause of chemical burns.\n\n2. Remove all contaminated clothing or jewelry.\n\nIf burn is caused by dry lime, phenols, elemental metals such as sodium, potassium, magnesium, lithium, or phosphorous, do NOT wash burn with water. These chemicals react horribly. If not: \n2.5. Rinse burn with gentle, steady, cool water. (10+ minutes)\n\n3. Cover burn with bandage or gauze.",
+    "Medications": "Over-the-counter pain relief.",
+    "Other Notes": "If burn worsens or excessive swelling occurs, call 911.\n\nSources:\nhttps://www.webmd.com/first-aid/chemical-burns-treatment\nhttps://www.mayoclinic.org/first-aid/first-aid-chemical-burns/basics/art-20056667"
+  },
+  {
+    "Name": "Choking (Adult/Child)",
+    "Steps": "1. Stand or kneel behind the person and wrap your arms around his or her waist. If the person is standing, place one of your legs between his or her legs so you can support the person if he or she faints.\n\n\n2. Make a fist with one hand. Place the thumb side of your fist against the person's belly, just above the belly button but well below the breastbone.\n\n\n3. Grasp your fist with the other hand. Give a quick upward thrust into the belly. This may cause the object to pop out. You may need to use more force for a large person and less for a child or small adult.\n\n\n4. Repeat thrusts until the object pops out or the person faints.",
+    "Medications": "",
+    "Other Notes": ""
+  },
+  {
+    "Name": "Choking (Under 1 years old)",
+    "Steps": "1. Put the baby facedown on your forearm so the baby's head is lower than his or her chest.\n\n\n2. Support the baby's head in your palm, against your thigh. Don't cover the baby's mouth or twist his or her neck.\n\n\n3. Use the heel of one hand to give up to 5 back slaps between the baby's shoulder blades.\n\n\n4.I f the object does not pop out, support the baby's head and turn him or her face-up on your thigh. Keep the baby's head lower than his or her body.\n\n\n5. Place 2 or 3 fingers just below the nipple line on the baby's breastbone and give 5 quick chest thrusts (same position as chest compressions in CPR for a baby).\n\n\n6. Keep giving 5 back slaps and 5 chest thrusts until the object comes out or the baby faints.\n\n\n7. If the baby faints, call 911 if you haven't already.\n\n\n8. Do not do any more back slaps or chest thrusts.\n\n\n9. Start CPR. If you do rescue breaths, look for an object in the mouth or throat each time the airway is opened during CPR. If you see the object, take it out. But if you can't see the object, don't stick your finger down the baby's throat to feel for it.\n\n\n10. Keep doing CPR until the baby is breathing on his or her own or until help arrives.",
+    "Medications": "",
+    "Other Notes": ""
+  },
+  {
+    "Name": "Broken Limb",
+    "Steps": "1. Call for emergency services.\n\n2. Stop any bleeding using a sterilized bandage or a clean cloth, such as an article of clothing.\n\n3. Immobilize the injured region - use a splint if someone is trained in how to do so.\n\n4. Apply ice packs to reduce swelling - do not apply ice directly to the flesh.\n\n5. Treat for shock.",
+    "Medications": "",
+    "Other Notes": ""
   }
 ]
