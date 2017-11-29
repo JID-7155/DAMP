@@ -57,6 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="76dp"
                 android:layout_marginStart="8dp"
+                android:layout_marginTop="40dp"
                 android:ems="10"
                 android:hint="@string/plan_name"
                 android:inputType="textPersonName"
