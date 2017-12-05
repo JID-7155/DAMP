@@ -23,6 +23,7 @@ Disaster App for Medical Preparedness, DAMP, is an Android project focused on pr
 ## Release Notes
 1.00 (Current):
  - If utilizing on an emulator, please note that Maps functionality will assume the Google HQ as current location unless current coordinates are sent through the emulator toolkit. 
+ - You <strong>MUST</strong> replace the Google Maps API key with your own. It is located in the Android Manifest file.
 
 ## FAQ
 - Q. Who do I contact for more info?
