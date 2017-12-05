@@ -3,9 +3,8 @@ Disaster App For Medical Preparedness Project
 
 ## Sections
 1. [Project Introduction](https://github.com/JID-7155/DAMP#project-introduction)
-
-2. [Navigating Classes and Activities](https://github.com/JID-7155/DAMP#navigating-classes-and-activities)
-3. [Relevant Terminology](https://github.com/JID-7155/DAMP#relevant-terminology)
+2. [Installation](https://github.com/JID-7155/DAMP#installation)
+3. [Release Notes](https://github.com/JID-7155/DAMP#release-notes)
 4. [Frequently Asked Questions (FAQ)](https://github.com/JID-7155/DAMP#faq)
 
 
@@ -17,12 +16,16 @@ Disaster App for Medical Preparedness, DAMP, is an Android project focused on pr
 - <code>Melissa&nbsp;<strong>E</strong>ssue</code>.
 - <code>Joshua&nbsp;&nbsp;<strong>V</strong>aldez</code>.
 
-## Navigating Classes and Activities
-TBD.
+## Installation
+1. Clone the repository.
+2. Open in Android Studio, and run on an emulator. You're also welcome to utilize it on a mobile device through Android Studio.
 
-## Relevant Terminology
-TBD.
+## Release Notes
+1.00 (Current):
+ - If utilizing on an emulator, please note that Maps functionality will assume the Google HQ as current location unless current coordinates are sent through the emulator toolkit. 
 
 ## FAQ
 - Q. Who do I contact for more info?
 -- A. Our team lead, Adrian Rodriguez, at aorf3@gatech.edu
+- Q. Am I free to use and modify this project for whatever purposes I see, be it commercial or personal?
+-- A. You are free to modify and utilize our code for any and all purposes, but all five original team members must be credited accordingly as contributors.
