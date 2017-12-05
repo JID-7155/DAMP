@@ -35,7 +35,7 @@ Disaster App for Medical Preparedness, DAMP, is an Android project focused on pr
  - You <strong>MUST</strong> replace the Google Maps API key with your own. It is located in the Android Manifest file.
  
 Fixes:
- - The step list on the plan screen now parses each step as a seperate item in a listview.
+ - The step list on the plan screen now parses each step as a separate item in a listview.
  - All entry text fields are now more flexible and grow as neccessary.
  - Fixed exception that occured when accessing a patient who currently has no plans.
  - General UI improvements across the app, particularly the Maps Screen.
