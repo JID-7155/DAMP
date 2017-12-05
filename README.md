@@ -49,8 +49,6 @@ Fixes:
 
 ## FAQ
 - Q. Who do I contact for more info?
-
--- A. Our team lead, Adrian Rodriguez, at aorf3@gatech.edu
+  * A. Our team lead, Adrian Rodriguez, at aorf3@gatech.edu
 - Q. Am I free to use and modify this project for whatever purposes I see, be it commercial or personal?
-
--- A. You are free to modify and utilize our code for any and all purposes, but all five original team members must be credited accordingly as contributors.
+  * A. You are free to modify and utilize our code for any and all purposes, but all five original team members must be credited accordingly as contributors.
